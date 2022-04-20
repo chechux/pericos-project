@@ -20,12 +20,13 @@ class Dimension():
 
 class Items():
 
-    def __init__(self,nombre,tipo,potencia,descipcion):
+    def __init__(self,nombre,tipo,potencia,descipcion,turnos):
 
         self.nombre = nombre
         self.tipo = tipo
         self.potencia = potencia
         self.descripcion = descipcion
+        self.turnos = turnos
 
 
 
@@ -154,7 +155,27 @@ homero = Jugador("homero",100,40,50,50,20)
 #funcion de batalla
 def fight(jugador,villano):
 
-    print(villano)
+    while jugador.vida >0 and villano.vida >0:
+
+        action = int(input("\n\n1--Ver stats villano\n\n2--Ver stats jugador\n\n3--Atacar villano\n\n4--Usar item\n\n5--huir\n\n"))
+
+        if action == 1:
+
+            limpiar_pantalla()
+
+            print(villano)
+
+        if action == 2:
+
+            limpiar_pantalla()
+
+            print(jugador)
+
+        if action ==3:
+            pass
+
+        if action == 5:
+            break
 
 
 
@@ -179,9 +200,11 @@ def main(jugador):
 
             print("te vas a enfrentar a",villano_actual.nombre)
 
+            fight(jugador,villano_actual)
+
     else:
         print("error ! no puedes jugar si no es con un jugador valido\n")
 
-# main(homero)
+main(homero)
 
-print(homero)
+# print(homero)
