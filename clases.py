@@ -125,7 +125,9 @@ bola_de_nieve = Mob("bola de nieve",100,5,5,50,10)
 
     #dimension
 
-dimension_c137 = Dimension("C-137",[pistola_portales,espada_bacon,cuencas_de_ojos,parche_de_morty],[abradolflincler])
+dimension_c137 = Dimension("C-137",[pistola_portales,espada_bacon,cuencas_de_ojos,parche_de_morty],[abradolf_lincler,asustadizo_terry,bola_de_nieve])
+
+
 
 
 dimensiones = [dimension_c137] 
@@ -134,7 +136,34 @@ dimensiones = [dimension_c137]
 
 homero = Jugador("homero",100,40,50,50,20) 
 
+#pruebas
+
 # homero.set_items()
 
-dimensiones[0].villanos[0].nombre
-print(dimensiones[0].villanos[0].nombre)
+# dimensiones[0].villanos[0].nombre
+# print(dimensiones[0].villanos[0].nombre)
+
+def main(jugador):
+
+    if isinstance(jugador,Jugador):
+
+        while jugador.vida >0:
+
+            print("vamos a entrar dentro de alguna dimension...")
+
+            dimension_actual = dimensiones[random.randrange(0,len(dimensiones))]
+
+            print("vaya ! parece que hemos acabado en la dimension",dimension_actual.nombre)
+
+            time.sleep(1)
+
+            jugador.vida -=10
+
+            villano_actual = dimension_actual.villanos[random.randrange(0,len(dimension_actual.villanos))]
+
+            print("te vas a enfrentar a",villano_actual.nombre)
+
+    else:
+        print("error ! no puedes jugar si no es con un jugador valido\n")
+
+main(homero)
