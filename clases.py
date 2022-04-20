@@ -43,6 +43,11 @@ class Mob():
         self.precision = precision
         self.velocidad = velocidad
 
+    def __str__(self):
+        
+        return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)+"\n\n----------------------"
+
+
 class Jugador(Mob):
 
     def __init__(self,nombre,vida,ataque,defensa,precision,velocidad):
@@ -143,6 +148,17 @@ homero = Jugador("homero",100,40,50,50,20)
 # dimensiones[0].villanos[0].nombre
 # print(dimensiones[0].villanos[0].nombre)
 
+
+#subfunciones que se usaran en main
+
+#funcion de batalla
+def fight(jugador,villano):
+
+    print(villano)
+
+
+
+#funcion principal del juego
 def main(jugador):
 
     if isinstance(jugador,Jugador):
@@ -166,4 +182,6 @@ def main(jugador):
     else:
         print("error ! no puedes jugar si no es con un jugador valido\n")
 
-main(homero)
+# main(homero)
+
+print(homero)
