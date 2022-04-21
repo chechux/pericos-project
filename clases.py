@@ -1,5 +1,6 @@
 import random,os,time
 
+
 def limpiar_pantalla():
 
     limpiar = "clear"
@@ -28,10 +29,10 @@ class Items():
         self.descripcion = descipcion
         self.turnos = turnos
 
+    
 
 
-
-selec_items = [Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla"),Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza"),Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube")]
+selec_items = [Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",1),Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",1),Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube",1)]
 
 class Mob():
 
@@ -47,6 +48,13 @@ class Mob():
     def __str__(self):
         
         return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)+"\n\n----------------------"
+
+    def atacar(self,victima):
+
+        total_damage = self.ataque-(self.ataque * victima.defensa/100)
+
+        victima.vida -= total_damage
+        return total_damage
 
 
 class Jugador(Mob):
@@ -114,13 +122,13 @@ class Jugador(Mob):
     #items
 
 #los items de tipo sk sirven para tener 2 turnos seguidos,es decir,que el rival se pierda su tuno por alguna rzon
-pistola_portales = Items("pistola de portales","sk",0,"con la pistola de portales de rick te vas a la dimension 35 en tal de esquivar el golpe y vuelve a ser tu turno !")
+pistola_portales = Items("pistola de portales","sk",0,"con la pistola de portales de rick te vas a la dimension 35 en tal de esquivar el golpe y vuelve a ser tu turno !",1)
 #los items de tipo ataque incrementan la fuerza
-espada_bacon = Items("espada bacon","a",random.randrange(10,25),"con esta ridicula y sabrosa espada aumenta tu fuerza !")
+espada_bacon = Items("espada bacon","a",random.randrange(10,25),"con esta ridicula y sabrosa espada aumenta tu fuerza !",1)
 #los items de tipo sanacion incrementan la vida
-cuencas_de_ojos = Items("cuencas de ojos","s",random.randrange(10,25),"con estos deliciosas y asquerosas cuencas de ojos aumenta tu salud !")
+cuencas_de_ojos = Items("cuencas de ojos","s",random.randrange(10,25),"con estos deliciosas y asquerosas cuencas de ojos aumenta tu salud !",1)
 #los items de tipo precicison incrementan la precision,obviamente
-parche_de_morty = Items("parche de morty","p",30,"con este parche de morty te vuelves mas audaz y tu precision aumenta")
+parche_de_morty = Items("parche de morty","p",30,"con este parche de morty te vuelves mas audaz y tu precision aumenta",1)
 #los items
 
     #villanos
@@ -172,7 +180,22 @@ def fight(jugador,villano):
             print(jugador)
 
         if action ==3:
-            pass
+            
+            if random.random() < max((jugador.precision-villano.velocidad)/100,0.3):
+
+                j1,j2 = jugador,villano
+
+            else:
+                j1,j2 = villano,jugador
+
+            print(j1.nombre,"es mas veloz que",j2.nombre,"y le va a golpear primero")
+
+            time.sleep(1)
+
+            total_damage = j1.atacar(j2)
+
+            print("Ese golpe le ha quitado",total_damage,"de vida")
+
 
         if action == 5:
             break
@@ -193,8 +216,6 @@ def main(jugador):
             print("vaya ! parece que hemos acabado en la dimension",dimension_actual.nombre)
 
             time.sleep(1)
-
-            jugador.vida -=10
 
             villano_actual = dimension_actual.villanos[random.randrange(0,len(dimension_actual.villanos))]
 
