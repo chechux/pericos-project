@@ -32,7 +32,12 @@ class Items():
     
 
 
-selec_items = [Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",1),Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",1),Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube",1)]
+selec_items = [
+    
+    Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",1),
+    Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",1),
+    Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube",1)
+]
 
 class Mob():
 
@@ -181,11 +186,12 @@ def fight(jugador,villano):
 
         if action ==3:
             
-            if random.random() < max((jugador.precision-villano.velocidad)/100,0.3):
+            if random.random() < max((jugador.precision-villano.velocidad)/100,0.3): 
 
                 j1,j2 = jugador,villano
 
             else:
+
                 j1,j2 = villano,jugador
 
             print(j1.nombre,"es mas veloz que",j2.nombre,"y le va a golpear primero")
@@ -207,6 +213,8 @@ def main(jugador):
 
     if isinstance(jugador,Jugador):
 
+        jugador.set_items()
+
         while jugador.vida >0:
 
             print("vamos a entrar dentro de alguna dimension...")
@@ -220,6 +228,8 @@ def main(jugador):
             villano_actual = dimension_actual.villanos[random.randrange(0,len(dimension_actual.villanos))]
 
             print("te vas a enfrentar a",villano_actual.nombre)
+
+            time.sleep(1)
 
             fight(jugador,villano_actual)
 
