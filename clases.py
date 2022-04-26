@@ -168,6 +168,8 @@ homero = Jugador("homero",100,40,50,50,20)
 #funcion de batalla
 def fight(jugador,villano):
 
+    kapasao = 10
+
     while jugador.vida >0 and villano.vida >0:
 
         action = int(input("\n\n1--Ver stats villano\n\n2--Ver stats jugador\n\n3--Atacar villano\n\n4--Usar item\n\n5--huir\n\n"))
@@ -194,20 +196,34 @@ def fight(jugador,villano):
 
                 j1,j2 = villano,jugador
 
-            print(j1.nombre,"es mas veloz que",j2.nombre,"y le va a golpear primero")
+            for i in range(2):
 
-            time.sleep(1)
+                print(j1.nombre,"es mas veloz que",j2.nombre,"y le va a golpear primero")
 
-            total_damage = j1.atacar(j2)
+                time.sleep(1)
 
-            print("Ese golpe le ha quitado",total_damage,"de vida")
+                total_damage = j1.atacar(j2)
 
+                print("Ese golpe le ha quitado",total_damage,"de vida")
 
+                j1,j2 = j2,j1
+
+                # print(jugador.vida,villano.vida)
+                if jugador.vida <=0:
+                    kapasao = 0
+                    break
+
+                if villano.vida <=0:
+                    # kapasao = 1
+                    return 1
+                    break
+        
         if action == 5:
             break
 
-
-
+    return kapasao
+        
+dimensioness =[]
 #funcion principal del juego
 def main(jugador):
 
@@ -215,26 +231,49 @@ def main(jugador):
 
         jugador.set_items()
 
-        while jugador.vida >0:
+        while jugador.vida >0 and len(dimensiones) > 0:
 
-            print("vamos a entrar dentro de alguna dimension...")
-
-            dimension_actual = dimensiones[random.randrange(0,len(dimensiones))]
-
-            print("vaya ! parece que hemos acabado en la dimension",dimension_actual.nombre)
+            print("\nvamos a entrar dentro de alguna dimension...\n")
 
             time.sleep(1)
 
-            villano_actual = dimension_actual.villanos[random.randrange(0,len(dimension_actual.villanos))]
+            index_dimension = random.randrange(0,len(dimensiones))
+            dimension_actual = dimensiones[index_dimension]
 
-            print("te vas a enfrentar a",villano_actual.nombre)
+
+            print("\nvaya ! parece que hemos acabado en la dimension",dimension_actual.nombre,"\n")
 
             time.sleep(1)
 
-            fight(jugador,villano_actual)
+            if len(dimension_actual.villanos)>0:
 
+                index_villano = random.randrange(0,len(dimension_actual.villanos)) #indice aleatorio para elegir villano aleatorio
+                villano_actual = dimension_actual.villanos[index_villano]
+
+                print("\nte vas a enfrentar a",villano_actual.nombre,"\n")
+
+                time.sleep(1)
+
+                ragnarok =fight(jugador,villano_actual)
+
+                print(ragnarok)
+
+                if ragnarok == 0:
+                    print("jugador",jugador.nombre,"derrotado de manera muy brutal")
+                elif ragnarok == 1:
+                    print("villano",villano_actual.nombre,"derrotado de manera muy brutal")
+                    del dimension_actual.villanos[index_villano]
+
+            else:
+                print("has derrotado a todos los villanos de esta dimension...")
+                del dimensiones[index_dimension]
+
+        if len(dimensiones) == 0:
+            print("Enhorabuena,te has pasado el juego -- te has pasado el juego")
     else:
         print("error ! no puedes jugar si no es con un jugador valido\n")
+
+    print("final while")
 
 main(homero)
 
