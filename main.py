@@ -49,9 +49,9 @@ def main(jugador):
 
             if len(dimension_actual.villanos)==0:
                 print("\nhas derrotado a todos los villanos de esta dimension...\n")
-                del cl.dimensiones[index_dimension]
+                del ins.dimensiones[index_dimension]
 
-        if len(cl.dimensiones) == 0:
+        if len(ins.dimensiones) == 0:
             print("Enhorabuena,te has pasado el juego -- te has pasado el juego")
         else:
             print("te rascaron")

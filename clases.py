@@ -29,14 +29,15 @@ class Items():
         self.potencia = potencia
         self.descripcion = descipcion
         self.turnos = turnos
+        self.activo = [False]
 
     
 
 
 selec_items = [
     
-    Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",1),
-    Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",1),
+    Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",3),
+    Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",3),
     Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube",1)
 ]
 
@@ -53,7 +54,7 @@ class Mob():
 
     def __str__(self):
         
-        return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)+"\n\n----------------------"
+        return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes :\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)
 
     def atacar(self,victima):
 
@@ -71,6 +72,17 @@ class Jugador(Mob):
           
         self.items= {}
         self.habilidades = {}
+
+    def __str__(self):
+
+        if len(self.items)>0:
+            superti = ""
+            for item in self.items.values():
+                superti += item.nombre+"\ndescripcion : "+item.descripcion+" ||| activo : "+str(item.activo[0])+"\n\n"
+            return super().__str__() + "\n\nLos Items en el inventario son los siguientes :\n\n"+superti+"----------------------"
+
+        else:
+            return super().__str__() + "\n\nNo hay Items en el inventario\n\n----------------------"
 
     def set_items(self):
 
@@ -231,60 +243,60 @@ class Jugador(Mob):
 #     return kapasao
         
 #funcion principal del juego
-def main(jugador):
+# def main(jugador):
 
-    if isinstance(jugador,Jugador):
+#     if isinstance(jugador,Jugador):
 
-        jugador.set_items()
+#         jugador.set_items()
 
-        while jugador.vida >0 and len(dimensiones) > 0:
+#         while jugador.vida >0 and len(dimensiones) > 0:
 
-            print("\nvamos a entrar dentro de alguna dimension...\n")
+#             print("\nvamos a entrar dentro de alguna dimension...\n")
 
-            time.sleep(1)
+#             time.sleep(1)
 
-            index_dimension = random.randrange(0,len(dimensiones))
-            dimension_actual = dimensiones[index_dimension]
+#             index_dimension = random.randrange(0,len(dimensiones))
+#             dimension_actual = dimensiones[index_dimension]
 
 
-            print("\nvaya ! parece que hemos acabado en la dimension",dimension_actual.nombre,"\n")
+#             print("\nvaya ! parece que hemos acabado en la dimension",dimension_actual.nombre,"\n")
 
-            time.sleep(1)
+#             time.sleep(1)
 
-            for times in range(len(dimension_actual.villanos)):
+#             for times in range(len(dimension_actual.villanos)):
 
-                index_villano = random.randrange(0,len(dimension_actual.villanos)) #indice aleatorio para elegir villano aleatorio
-                villano_actual = dimension_actual.villanos[index_villano]
+#                 index_villano = random.randrange(0,len(dimension_actual.villanos)) #indice aleatorio para elegir villano aleatorio
+#                 villano_actual = dimension_actual.villanos[index_villano]
 
-                print("\nte vas a enfrentar a",villano_actual.nombre,"\n")
+#                 print("\nte vas a enfrentar a",villano_actual.nombre,"\n")
 
-                time.sleep(1)
+#                 time.sleep(1)
 
-                ragnarok =fight(jugador,villano_actual)
+#                 ragnarok =fight(jugador,villano_actual)
                                 
-                # print(ragnarok)
+#                 # print(ragnarok)
 
-                if ragnarok == 0:
-                    print("jugador",jugador.nombre,"derrotado de manera muy brutal")
-                    break
-                elif ragnarok == 1:
-                    print("\nvillano",villano_actual.nombre,"derrotado de manera muy brutal\n")
-                    del dimension_actual.villanos[index_villano]
+#                 if ragnarok == 0:
+#                     print("jugador",jugador.nombre,"derrotado de manera muy brutal")
+#                     break
+#                 elif ragnarok == 1:
+#                     print("\nvillano",villano_actual.nombre,"derrotado de manera muy brutal\n")
+#                     del dimension_actual.villanos[index_villano]
 
-                limpiar_pantalla()
+#                 limpiar_pantalla()
 
-            if len(dimension_actual.villanos)==0:
-                print("\nhas derrotado a todos los villanos de esta dimension...\n")
-                del dimensiones[index_dimension]
+#             if len(dimension_actual.villanos)==0:
+#                 print("\nhas derrotado a todos los villanos de esta dimension...\n")
+#                 del dimensiones[index_dimension]
 
-        if len(dimensiones) == 0:
-            print("Enhorabuena,te has pasado el juego -- te has pasado el juego")
-        else:
-            print("te rascaron")
-    else:
-        print("error ! no puedes jugar si no es con un jugador valido\n")
+#         if len(dimensiones) == 0:
+#             print("Enhorabuena,te has pasado el juego -- te has pasado el juego")
+#         else:
+#             print("te rascaron")
+#     else:
+#         print("error ! no puedes jugar si no es con un jugador valido\n")
 
-    print("final while")
+#     print("final while")
 
 # main(homero)
 
