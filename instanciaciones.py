@@ -26,10 +26,43 @@ bola_de_nieve = cl.Mob("bola de nieve",100,5,5,50,10)
 dimension_c137 = cl.Dimension("C-137",[pistola_portales,espada_bacon,cuencas_de_ojos,parche_de_morty],[abradolf_lincler,asustadizo_terry,bola_de_nieve])
 
 
+    #Dimension Fondo de bikini
+
+#items
+
+#sk
+savia_gary=("SaviGary","sk",0,"tirale savia de gary a tu rival para que no pueda atacar durante un turno!",1)
+
+#ataque
+caza_medusas = cl.Items("CazaMedusas 3000", "a", random.randrange(10,25),"Con el nuevo modelo CazaMedusas aumenta tu daño!",1)
+espatula = cl.Items("Espatula de Oro","a",random.randrange(20,25),"el arma legendaria de Bobesponja! calcina a tus rivales.",1)#legendaria
+
+#sanacion
+bote_burbujas = cl.Items("Burbujeitor","s",random.randrange(10,25),"rociate de este jabon burbujeante para recuperar salud!",1)
+cangreburguer = cl.Items("BurguerCangreburguer","s",random.randrange(20,25), "comete esta delicia para quedarte como nuevo!",1)#legendaria
+
+#precision
+gafas = cl.Items("Lectometor","p",30,"ponte estas gafas de lectura para aumentar tu precision",1)
 
 
-dimensiones = [dimension_c137] 
+
+#villanos
+
+patricio=cl.Mob("Patricio Estrella",100,5,10,50,7)
+arenita=cl.Mob("Arenita Mejillas",100,10,5,70,10)
+placton=cl.Mob("Placton",80,10,5,90,10)
+calamardo=cl.Mob("Calamardo",100,5,5,50,10)
+
+
+#dimension
+
+dimension_fondo_de_bikini = cl.Dimension("Fondo de bikini",[savia_gary, caza_medusas, espatula, bote_burbujas, cangreburguer, gafas],[patricio, arenita, placton, calamardo])
+
+
+
+
+dimensiones = [dimension_c137,dimension_fondo_de_bikini]
         
                
-
+#jugadores
 homero = cl.Jugador("homero",100,40,50,50,20) 
