@@ -2,20 +2,30 @@ import time
 import random
 ###MINIJUEGO###
 
-##print("-->JUAJUAJUJUAJUA")
-##time.sleep(2)
-##print("-->¡Que mala suerte grumete! te has topado con el mismisimo e insuperable...")
-##time.sleep(2.5)
-##print("-->¡HOLANDES ERRANTE!")
-##time.sleep(1)
-##print("-->JUAJUAJUUAJUAJU")
-##time.sleep(2)
-##print("-->¡Ahora tendras que enfrentarte a mi en una carrera encarnizada!")
-##time.sleep(3)
-##print("ahora elige tu vehiculo")
-##print("")
-##time.sleep(1.5)
-
+print("-->JUAJUAJUJUAJUA")
+time.sleep(2)
+print("-->¡Que mala suerte grumete! te has topado con el mismisimo e insuperable...")
+time.sleep(2.5)
+print("-->¡HOLANDES ERRANTE!")
+time.sleep(0.5)
+print("""
+     ( " ")
+   /\_.' '._/\
+\   
+   |         |
+    \       /
+     \    /`
+   (__)  /
+     `.__.'
+""")
+time.sleep(1)
+print("-->JUAJUAJUUAJUAJU")
+time.sleep(2)
+print("-->¡Ahora tendras que enfrentarte a mi en una carrera encarnizada!")
+time.sleep(3)
+print("ahora elige tu vehiculo:")
+print("")
+time.sleep(1.5)
 
                                     
 
@@ -37,16 +47,16 @@ class Vehiculo():
         self.metros_r+=metrosa
         self.gasolina-=random.randrange(5,15)
 
-        print(self.nombre, "ha avanzado", metrosa,", en total ha avanzado",self.metros_r,"te quedan", self.gasolina,"litros de aceite grasiento")
+        print(self.nombre, "has avanzado", metrosa,"metros, en total has avanzado",self.metros_r,"metros, te quedan", self.gasolina,"litros de aceite grasiento.")
         if self.gasolina < 30:
             time.sleep(1)
-            print("¡CUIDADO!, Te quedan", self.gasolina, " litros de aceite grasiento, deberias repostar")
+            print("¡CUIDADO!, Te quedan", self.gasolina, " litros de aceite grasiento, deberias repostar...")
 
     def avanzarh(self):
         metrosa = (random.randrange(1,7) * self.velocidad)/2
         self.metros_r+=metrosa
         self.gasolina-=random.randrange(5,15)
-        print(self.nombre, "ha avanzado", metrosa,", en total ha avanzado",self.metros_r, "le quedan" , self.gasolina,"litros de aceite grasiento")
+        print(self.nombre, "ha avanzado", metrosa,"metros, en total ha avanzado",self.metros_r, "metros, le quedan" , self.gasolina,"litros de aceite grasiento.")
                  
 
     def repostar(self):
@@ -66,21 +76,33 @@ class Vehiculo():
         gasolinar=random.randrange(10,30)
         self.gasolina +=gasolinar
         time.sleep(2)
-        print("¡Repostado! ahora tienes", self.gasolina, "litros de aceite grasiento")
+        print("¡Repostado! ahora tienes", self.gasolina, "litros de aceite grasiento.")
 
     def repostarh(self):
         gasolinar=random.randrange(10,30)
         self.gasolina +=gasolinar
         time.sleep(1)
-        print("El Holandes ha repostado aceite grasiento")
+        print("El Holandes ha repostado aceite grasiento.")
     
     
     def atacar(self,holandes):
         dañor = random.randrange(1,self.daño)
         holandes.resistencia -=dañor
-        print(self.nombre," ataca, logrando", dañor,"puntos de daño, le quedan", holandes.resistencia,"puntos de vida")
+        print(self.nombre," ataca, logrando", dañor,"puntos de daño, le quedan", holandes.resistencia,"puntos de vida al Holandes.")
         if dañor > self.daño-3:
-            print("¡GOLPE CRÍTICO!, golpeas dos veces seguidas")
+            print("¡GOLPE CRÍTICO!, golpeas dos veces seguidas.")
+            print("""
+
+              _ ._  _ , _ ._
+            (_ ' ( `  )_  .__)
+           ( (  (    )   `)  ) _)
+          (__ (_   (_ . _) _) ,__)
+             `~~`\ ' . /`~~`
+                      ;   ;  
+                     /   \\
+_____________/_ __ \_____________
+
+""")
             time.sleep(0.5)
             print("--> ARRGHH ¡MALDITA ESPONJA!")
             return True
@@ -90,29 +112,47 @@ class Vehiculo():
     def atacarc(self,holandes):
         dañor = random.randrange(1,self.daño)
         holandes.resistencia -=dañor
-        print(self.nombre," ataca, logrando", dañor,"puntos de daño, le quedan", holandes.resistencia,"puntos de vida")
+        print(self.nombre," ataca, logrando", dañor,"puntos de daño, le quedan", holandes.resistencia,"puntos de vida.")
 
 
     def atacarh(self,v):
         dañor = random.randrange(1,self.daño)
         v.resistencia -=dañor
-        print(self.nombre," ataca, logrando", dañor,"puntos de daño, te quedan", v.resistencia,"puntos de vida")
+        print(self.nombre," ataca, logrando", dañor,"puntos de daño, te quedan", v.resistencia,"puntos de vida.")
         if dañor > self.daño-3:
             print("¡GOLPE CRÍTICO!, el Holandes te golpea dos veces...")
+            print("""
+              _ ._  _ , _ ._
+            (_ ' ( `  )_  .__)
+           ( (  (    )   `)  ) _)
+          (__ (_   (_ . _) _) ,__)
+             `~~`\ ' . /`~~`
+                      ;   ;  
+                     /   \\
+_____________/_ __ \_____________
+""")
             time.sleep(0.5)
-            print("--> JUAJUAJUA ¡PRINGAO!")
             dañor = random.randrange(1,self.daño)
             v.resistencia -=dañor
-            print(self.nombre," ataca, logrando", dañor,"puntos de daño, te quedan", v.resistencia,"puntos de vida")
-            
-        
+            print(self.nombre," ataca, logrando", dañor,"puntos de daño, te quedan", v.resistencia,"puntos de vida.")
+            print("--> JUAJUAJUA ¡PRINGAO!")
+                   
 
     def azar(self,z):
         metodo=random.randint(1,2)
         if metodo == 1:
-            holandes.atacarh(z)
+             holandes.atacarh(z)
         elif metodo == 2:
             holandes.avanzarh()
+
+    def desc(self,holandes):
+        print(self.nombre.upper())
+        print("--------------------")
+        print("-Metros recorridos:", self.metros_r,"\n-Vida:",self.resistencia,"\n-Gasolina:", self.gasolina)
+        print("")
+        print(holandes.nombre.upper())
+        print("--------------------")
+        print("-Metros recorridos:", holandes.metros_r,"\n-Vida:",holandes.resistencia,"\n-Gasolina:", holandes.gasolina)
                 
 
     def empezar(self):
@@ -188,10 +228,12 @@ def perder():
 """)
 
 
-holandes=Vehiculo("Barco del holandes errante",7,17,30,100)
-v1=Vehiculo("coche de la señorita puff",7,10,90,90)
-v2=Vehiculo("Gary",5,15,150,175)
-v3=Vehiculo("casa de bobesponja",10,20,80,70)
+##velocidad,daño,resistencia,gasolina
+
+holandes=Vehiculo("Barco del holandes errante",10,15,100,100)
+v1=Vehiculo("coche de la señorita puff",10,10,90,90)
+v2=Vehiculo("Gary",7,10,150,150)
+v3=Vehiculo("casa de bobesponja",15,17,80,75)
 
 
 
@@ -206,7 +248,7 @@ print("")
 print("-------- BOSS STATS--------")
 print(holandes)
 print("")
-print("REGLAS: \nPulsa 1 para avanzar x metros. \nPulsa 2 para repostar aceite grasiento. \nPulsa 3 para atacar al Holandes Errante.")
+print("REGLAS: \nPulsa 1 para avanzar x metros. \nPulsa 2 para repostar aceite grasiento. \nPulsa 3 para atacar al Holandes Errante. \nPulsa 4 para ver las stats acutales.")
 print("")
 time.sleep(1.5)
 print("!Llega a los 200 metros o destruye el vehiculo enemigo para ganar!")
@@ -217,10 +259,11 @@ eleccion=input("-->")
 
 
 
-
 if eleccion == "v1":
     print(v1.nombre," ¡Buena elecion!")
+    time.sleep(1)
     v1.empezar()
+    time.sleep(0.5)
     
     while v1.metros_r <= 200 and holandes.metros_r <=200:
         if v1.gasolina <= 0:
@@ -235,7 +278,7 @@ if eleccion == "v1":
             break
         
         print("")
-        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n-->"))
+        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n-->"))
         print("")
         if accion == 1:
             v1.avanzar()
@@ -260,6 +303,10 @@ if eleccion == "v1":
                     holandes.repostarh()
                 else:
                     holandes.azar(v1)
+                    
+        if accion == 4:
+            v1.desc(holandes)
+            
 
     if v1.metros_r >=200:
         print("¡¡¡Enhorabuena!!! has llegado a la meta antes que el Holandes Errante :)")
@@ -270,7 +317,7 @@ if eleccion == "v1":
         perder()
 
     elif v1.gasolina <=0:
-        print("Has perdido... Te has quedado sin aceite grasiento")
+        print("Has perdido... Te has quedado sin aceite grasiento.")
         perder()
         
     elif v1.resistencia <=0:
@@ -278,7 +325,7 @@ if eleccion == "v1":
         perder()
 
     elif holandes.resistencia <=0:
-        print("¡Has tumbado el barco del Holandes Errante! Enhorabuena")
+        print("¡Has tumbado el barco del Holandes Errante! Enhorabuena.")
         ganar()
             
 
@@ -287,7 +334,10 @@ if eleccion == "v1":
 
 
 if eleccion == "v2":
-    print(v2.nombre, "¡Buena eleccion!")    
+    print(v2.nombre, "¡Buena eleccion!")
+    time.sleep(1)
+    v2.empezar()
+    time.sleep(0.5)
     while v2.metros_r <= 200 and holandes.metros_r <=200:
         if v2.gasolina <= 0:
             break
@@ -301,7 +351,7 @@ if eleccion == "v2":
             break
         
         print("")
-        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar"))
+        accion=int(input("¿que vas a hacer?:\n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n-->"))
         print("")
         if accion == 1:
             v2.avanzar()
@@ -309,8 +359,7 @@ if eleccion == "v2":
                 holandes.repostarh()
             else:
                 holandes.azar(v2)
-            
-                
+                            
 
         if accion == 2:
             v2.repostar()
@@ -321,15 +370,19 @@ if eleccion == "v2":
                 pass
 
 
-            if accion == 3:
-                if v2.atacar(holandes):
-                    v2.atacarc(holandes)
-                    holandes.azar(v2)
+        if accion == 3:
+            if v2.atacar(holandes):
+                v2.atacarc(holandes)
+                holandes.azar(v2)
+            else:
+                if holandes.gasolina < 20:
+                    holandes.repostarh()
                 else:
-                    if holandes.gasolina < 20:
-                        holandes.repostarh()
-                    else:
-                        holandes.azar(v2)
+                    holandes.azar(v2)
+
+                    
+        if accion == 4:
+            v2.desc(holandes)
                     
     if v2.metros_r >=200:
         print("¡¡¡Enhorabuena!!! has ganado al Holandes Errante :)")
@@ -340,15 +393,15 @@ if eleccion == "v2":
         perder()
 
     elif v2.gasolina <=0:
-        print("Has perdido... Te has quedado sin aceite grasiento")
+        print("Has perdido... Te has quedado sin aceite grasiento.")
         perder()
 
     elif v2.resistencia <=0:
-        print("El Holandes ha roto tu vehiculo... has perdido")
+        print("El Holandes ha roto tu vehiculo... has perdido.")
         perder()
         
     elif holandes.resistencia <=0:
-        print("¡Has tumbado el barco del Holandes Errante! Enhorabuena")
+        print("¡Has tumbado el barco del Holandes Errante! Enhorabuena.")
         ganar()
 
 
@@ -358,6 +411,8 @@ if eleccion == "v2":
         
 if eleccion == "v3":
     print(v3.nombre, "!Buena eleccion")
+    time.sleep(1)
+    v3.empezar()
 
     
     while v3.metros_r <= 200 and holandes.metros_r <=200:
@@ -373,7 +428,7 @@ if eleccion == "v3":
             break
         
         print("")
-        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar"))
+        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n -->"))
         print("")
         if accion == 1:
             v3.avanzar()
@@ -400,6 +455,9 @@ if eleccion == "v3":
                     holandes.repostarh()
                 else:
                     holandes.azar(v3)
+
+        if accion == 4:
+            v3.desc(holandes)
                     
 
     if v3.metros_r >=200:
@@ -411,15 +469,15 @@ if eleccion == "v3":
         perder()
         
     elif v3.gasolina <=0:
-        print("Has perdido... Te has quedado sin aceite grasiento")
+        print("Has perdido... Te has quedado sin aceite grasiento.")
         perder()
 
     elif v3.resistencia <=0:
-        print("El Holandes ha roto tu vehiculo... has perdido")
+        print("El Holandes ha roto tu vehiculo... has perdido.")
         perder()
         
     elif holandes.resistencia <=0:
-        print("¡Has tumbado el barco del Holandes Errante! Enhorabuena")
+        print("¡Has tumbado el barco del Holandes Errante! Enhorabuena.")
         ganar()
 
 
