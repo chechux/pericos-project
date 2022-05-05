@@ -3,9 +3,9 @@ import random
 ###MINIJUEGO###
 
 print("-->JUAJUAJUJUAJUA")
-time.sleep(2)
+time.sleep(1.5)
 print("-->¡Que mala suerte grumete! te has topado con el mismisimo e insuperable...")
-time.sleep(2.5)
+time.sleep(2)
 print("-->¡HOLANDES ERRANTE!")
 time.sleep(0.5)
 print("""
@@ -18,16 +18,15 @@ print("""
    (__)  /
      `.__.'
 """)
-time.sleep(1)
+time.sleep(1.5)
 print("-->JUAJUAJUUAJUAJU")
-time.sleep(2)
+time.sleep(1)
 print("-->¡Ahora tendras que enfrentarte a mi en una carrera encarnizada!")
 time.sleep(3)
 print("Elige tu vehiculo:")
 print("")
 time.sleep(1.5)
-
-                                    
+                                  
 
 class Vehiculo():
     def __init__(self,nombre,velocidad,daño,resistencia,gasolina,metros_r=0,kit=1):
@@ -49,24 +48,31 @@ class Vehiculo():
         self.gasolina-=random.randrange(5,15)
         pro_kit=random.randrange(1,25)
 
-        print(self.nombre, "has avanzado", metrosa,"metros, en total has avanzado",self.metros_r,"metros, te quedan", self.gasolina,"litros de aceite grasiento.")
+        print(self.nombre, "avanza", metrosa,"metros, en total has avanzado",self.metros_r,"metros, te quedan", self.gasolina,"litros de aceite grasiento.")
+        print("")
+        time.sleep(0.7)
         if self.gasolina < 30:
             time.sleep(1)
             print("¡CUIDADO!, Te quedan", self.gasolina, " litros de aceite grasiento, deberias repostar...")
+            print("")
+            time.sleep(0.7)
         if pro_kit == 2:
             print("!WOW¡ te has encontrado un kit de reparacion en el garaje del Señor Cangrejo")
+            print("")
             self.kit+=1
+            time.sleep(0,7)
 
     def avanzarh(self):
         metrosa = (random.randrange(1,7) * self.velocidad)/2
         self.metros_r+=metrosa
         self.gasolina-=random.randrange(5,15)
         print(self.nombre, "ha avanzado", metrosa,"metros, en total ha avanzado",self.metros_r, "metros, le quedan" , self.gasolina,"litros de aceite grasiento.")
+        time.sleep(0.7)
         pro_kit=random.randrange(1,25)
         if pro_kit == 2:
             print("El Holandes le ha robado un kit de reparacion al Señor Cangrejo")
             self.kit+=1
-                 
+            time.sleep(1)
 
     def repostar(self):
         print("Repostando...")
@@ -86,18 +92,23 @@ class Vehiculo():
         self.gasolina +=gasolinar
         time.sleep(2)
         print("¡Repostado! ahora tienes", self.gasolina, "litros de aceite grasiento.")
+        print("")
+        time.sleep(0.7)
 
     def repostarh(self):
         gasolinar=random.randrange(10,30)
         self.gasolina +=gasolinar
         time.sleep(1)
         print("El Holandes ha repostado aceite grasiento.")
+        time.sleep(1)
     
     
     def atacar(self,holandes):
         dañor = random.randrange(1,self.daño)
         holandes.resistencia -=dañor
         print(self.nombre," ataca, logrando", dañor,"puntos de daño, le quedan", holandes.resistencia,"puntos de vida al Holandes.")
+        print("")
+        time.sleep(0.7)
         if dañor > self.daño-3:
             print("¡GOLPE CRÍTICO!, golpeas dos veces seguidas.")
             print("""
@@ -112,8 +123,9 @@ class Vehiculo():
 _____________/_ __ \_____________
 
 """)
-            time.sleep(0.5)
+            time.sleep(1)
             print("--> ARRGHH ¡MALDITA ESPONJA!")
+            time.sleep(0.7)
             return True
         else:
             return False
@@ -121,13 +133,16 @@ _____________/_ __ \_____________
     def atacarc(self,holandes):
         dañor = random.randrange(1,self.daño)
         holandes.resistencia -=dañor
-        print(self.nombre," ataca, logrando", dañor,"puntos de daño, le quedan", holandes.resistencia,"puntos de vida.")
+        print(self.nombre," vuelve a atacar, logrando",dañor,"puntos de daño, le quedan",holandes.resistencia,"puntos de vida.")
+        print("")
+        time.sleep(0.7)
 
 
     def atacarh(self,v):
         dañor = random.randrange(1,self.daño)
         v.resistencia -=dañor
-        print(self.nombre," ataca, logrando", dañor,"puntos de daño, te quedan", v.resistencia,"puntos de vida.")
+        print(self.nombre," ataca, logrando",dañor,"puntos de daño, te quedan",v.resistencia,"puntos de vida.")
+        time.sleep(1)
         if dañor > self.daño-3:
             print("¡GOLPE CRÍTICO!, el Holandes te golpea dos veces...")
             print("""
@@ -140,14 +155,17 @@ _____________/_ __ \_____________
                      /   \\
 _____________/_ __ \_____________
 """)
-            time.sleep(0.5)
+            time.sleep(1.3)
             dañor = random.randrange(1,self.daño)
             v.resistencia -=dañor
             print(self.nombre," ataca, logrando", dañor,"puntos de daño, te quedan", v.resistencia,"puntos de vida.")
+            time.sleep(0.5)
             print("--> JUAJUAJUA ¡PRINGAO!")
+            time.sleep(1)
         if v.resistencia < 20:
             time.sleep(0.5)
             print("¡WARNING!, te quedan",v.resistencia, "puntos de resistencia, deberias reparar el vehiculo")
+            time.sleep(1)
 
     def curar(self):       
         if self.kit >=1:
@@ -160,11 +178,15 @@ _____________/_ __ \_____________
 )(
 ""
 """)
-            time.sleep(1.5)
+            time.sleep(2)
             print("¡Reparado! ahora tienes",self.resistencia ,"puntos de resistencia, te quedan",self.kit, "kits de reparacion")
+            print("")
+            time.sleep(0.7)
         else:
             time.sleep(0.5)
             print("¡No te quedan kits de reparación! encuentrate alguno avanzando")
+            print("")
+            time.sleep(0.7)
 
     def curarh(self):
         if self.kit >=1:
@@ -172,9 +194,9 @@ _____________/_ __ \_____________
             self.resistencia+=10
             time.sleep(1)
             print("El Holandes ha reparado su vehiculo")
+            time.sleep(0.7)
         else:
-            pass
-                   
+            pass                   
 
     def azar(self,z):
         metodo=random.randint(1,2)
@@ -191,6 +213,7 @@ _____________/_ __ \_____________
         print(holandes.nombre.upper())
         print("--------------------")
         print("-Metros recorridos:", holandes.metros_r,"\n-Vida:",holandes.resistencia,"\n-Gasolina:", holandes.gasolina,"\n-Kits:",holandes.kit)
+        time.sleep(0.7)
                 
 
     def empezar(self):
@@ -201,7 +224,6 @@ _____________/_ __ \_____________
 ┏┓┗┓┃
 ┃┗━┛┃
 ┗━━━┛
-
 """)
 
         time.sleep(1)
@@ -212,7 +234,6 @@ _____________/_ __ \_____________
 ┏━┛┏┛
 ┃┃┗━┓
 ┗━━━┛
-
 """)
 
         time.sleep(1)
@@ -224,14 +245,11 @@ _____________/_ __ \_____________
 ╋┃┃
 ┏┛┗┓
 ┗━━┛
-
 """)
 
         time.sleep(1.5)
 
         print("""
-
-
                  ┏┓
                  ┃┃
 ┏━━┳━━┫   ┃┃
@@ -240,7 +258,6 @@ _____________/_ __ \_____________
 ┗━┓┣━━┻   ┃┃
 ┏━┛┃        ┏━┓
 ┗━━┛        ┗━┛    
-
 """)
 
 def ganar():
@@ -251,7 +268,6 @@ def ganar():
                     ┃┗┛┗┛┃  ┃┃  ┃┃┗┓┃┃
                     ┗┓┏┓┏┛┏┫┣┓┃┃  ┃┃┃
                       ┗┛┗┛  ┗━━┛┗┛  ┗━┛
-
 """)
 
 def perder():
@@ -262,7 +278,6 @@ def perder():
                 ┃┃  ┏┓┃┃  ┃┃┗━━┓┃┃┏━━┛
                 ┃┗━┛┃┃┗━┛┃┃┗━┛┃┃┗━━┓
                 ┗━━━┛┗━━━┛┗━━━┛┗━━━┛
-
 """)
 
 
@@ -272,7 +287,6 @@ holandes=Vehiculo("Barco del holandes errante",10,15,100,100)
 v1=Vehiculo("coche de la señorita puff",10,10,90,90)
 v2=Vehiculo("Gary",7,10,150,150)
 v3=Vehiculo("casa de bobesponja",15,17,80,75)
-
 
 
 
@@ -316,7 +330,8 @@ if eleccion == "v1":
             break
         
         print("")
-        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n5.-Curar. \n-->"))
+        print("")
+        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n5.-Reparar. \n-->"))
         print("")
         if accion == 1:
             v1.avanzar()
@@ -376,7 +391,6 @@ if eleccion == "v1":
 
 
 
-
 if eleccion == "v2":
     print(v2.nombre, "¡Buena eleccion!")
     time.sleep(1)
@@ -395,7 +409,7 @@ if eleccion == "v2":
             break
         
         print("")
-        accion=int(input("¿que vas a hacer?:\n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n 5.-Curar. \n-->"))
+        accion=int(input("¿que vas a hacer?:\n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n 5.-Reparar. \n-->"))
         print("")
         if accion == 1:
             v2.avanzar()
@@ -457,7 +471,6 @@ if eleccion == "v2":
 
 
 
-
         
 if eleccion == "v3":
     print(v3.nombre, "!Buena eleccion")
@@ -478,7 +491,7 @@ if eleccion == "v3":
             break
         
         print("")
-        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n 5.-Curar. \n -->"))
+        accion=int(input("¿que vas a hacer?: \n.1-Avanzar. \n2.-Repostar. \n3.-Atacar. \n4.-Stats. \n 5.-Reparar. \n -->"))
         print("")
         if accion == 1:
             v3.avanzar()
@@ -536,6 +549,23 @@ if eleccion == "v3":
         print("¡Has tumbado el barco del Holandes Errante! Enhorabuena.")
         ganar()
 
-
-
-
+                                                                                                                                                                                                                ##      .--..--..--..--..--..--.
+                                                                                                                                                                                                                ##    .' \  (`._   (_)     _   \
+                                                                                                                                                                                                                ##  .'    |  '._)         (_)  |
+                                                                                                                                                                                                                ##  \ _.')\      .----..---.   /
+                                                                                                                                                                                                                ##  |(_.'  |    /    .-\-.  \  |
+                                                                                                                                                                                                                ##  \     0|    |   ( O| O) | o|
+                                                                                                                                                                                                                ##   |  _  |  .--.____.'._.-.  |
+                                                                                                                                                                                                                ##   \ (_) | o         -` .-`  |
+                                                                                                                                                                                                                ##    |    \   |`-._ _ _ _ _\ /
+                                                                                                                                                                                                                ##    \    |   |  `. |_||_|   |
+                                                                                                                                                                                                                ##    | o  |    \_      \     |     -.   .-.
+                                                                                                                                                                                                                ##    |.-.  \     `--..-'   O |     `.`-' .'
+                                                                                                                                                                                                                ##  _.'  .' |     `-.-'      /-.__   ' .-'
+                                                                                                                                                                                                                ##.' `-.` '.|='=.='=.='=.='=|._/_ `-'.'
+                                                                                                                                                                                                                ##`-._  `.  |________/\_____|    `-.'
+                                                                                                                                                                                                                ##   .'   ).| '=' '='\/ '=' |
+                                                                                                                                                                                                                ##   `._.`  '---------------'
+                                                                                                                                                                                                                ##           //___\   //___\
+                                                                                                                                                                                                                ##             ||       ||
+                                                                                                                                                                                                                ##               ||_.-.   ||_.-.
