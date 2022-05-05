@@ -56,6 +56,7 @@ def main(jugador):
         else:
             print("te rascaron")
     else:
+        
         print("error ! no puedes jugar si no es con un jugador valido\n")
 
     print("final while")

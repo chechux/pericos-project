@@ -32,7 +32,14 @@ class Items():
         self.activo = [False]
 
     
+class Habilidades ():
 
+    def __init__(self,nombre,tipo,potencia,descripcion):
+
+        self.nombre = nombre
+        self.tipo = tipo
+        self.potencia = potencia
+        self.descripcion = descripcion
 
 selec_items = [
     
@@ -61,17 +68,18 @@ class Mob():
         total_damage = self.ataque-(self.ataque * victima.defensa/100)
 
         victima.vida -= total_damage
+        
         return total_damage
 
 
 class Jugador(Mob):
 
-    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad):
+    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad,habilidades):
 
         super().__init__(nombre,vida,ataque,defensa,precision,velocidad)
           
         self.items= {}
-        self.habilidades = {}
+        self.habilidades = habilidades
 
     def __str__(self):
 

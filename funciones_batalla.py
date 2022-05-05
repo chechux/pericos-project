@@ -1,6 +1,50 @@
 import utilidades as ut
 import random,time
 
+    #funciones de habilidades
+
+#funcion de elegir habilidad
+
+def elegir_habilidad(jugador):
+
+    ut.limpiar_pantalla()
+
+    print("\n\nElige una habilidad para utilizar : \n\n")
+
+    for index,habilidad in enumerate(jugador.habilidades):
+
+        time.sleep(.5)
+
+        print(habilidad.nombre,":",habilidad.descripcion,"\n")
+        print("tipo :",habilidad.tipo,"potencia :",habilidad.potencia,"{",index,"}")
+
+    while True:
+    
+        habilidad_user = int(input("- - - > "))
+
+        try:
+            jugador.habilidades[habilidad_user]
+            return habilidad_user
+        except:
+            print("error ! habilidad no existente")
+            time.sleep(1)
+            
+    #quiero crear mas tarde mis propias excepciones
+
+
+#funcion usar habilidad
+
+def usar_habilidad(jugador,vilano,habilidad):
+    
+    habilidad_user = jugador.habilidades[habilidad]
+
+
+
+
+
+
+
+
 #funcion de duracion items
 
 def check_duration_items(jugador):
@@ -18,7 +62,9 @@ def check_duration_items(jugador):
             #segun el tipo de item que sea,volvemos a la normalidad de la stat del jugador que se habia modificado
             if value.tipo == "a":
                 jugador.ataque = value.activo[1]
-                
+
+            if value.tipo == "p":
+                jugador.precision = value.activo[1]                
 
     #si hay uno o mas items acabados se eliminan del inventario del jugador
     if len(items_acabados)>0:
@@ -31,16 +77,16 @@ def check_duration_items(jugador):
 def usar_item(jugador):
 
     okay = False
-    
-    if len(jugador.items) >0:
 
-        ut.limpiar_pantalla()
+    ut.limpiar_pantalla()
 
-        lista_items =[]
+    lista_items =[]
 
-        for item in jugador.items.values():
-            if item.activo[0] == False:
-                lista_items.append(item)
+    for item in jugador.items.values():
+        if item.activo[0] == False:
+            lista_items.append(item)
+
+    if len(lista_items)>0:
 
         print("\nTus items disponibles son los siguientes :\n")
 
@@ -72,19 +118,37 @@ def usar_item(jugador):
 
             #ponemos okay como true si todo sale bien y para posterior trackeo
             okay = True
-            print("se q no debo",jugador.items[item_seleccionado.nombre].activo)
+
             
         if item_seleccionado.tipo == "s":
+
             jugador.vida += item_seleccionado.potencia
             okay = True
             del jugador.items[item_seleccionado.nombre]
+
+        if item_seleccionado.tipo == "p":
+            
+            jugador.items[item_seleccionado.nombre].activo.append(jugador.precision)
+
+            jugador.precision +=item_seleccionado.potencia
+
+            jugador.items[item_seleccionado.nombre].activo[0] = True
+
+            okay = True
+
+        if item_seleccionado.tipo == "sk":
+
+            print("Vas a volver a golpear gracias a",item_seleccionado.nombre)
+
+
 
         # print(list(jugador.items.values())[0].nombre)
     else:
         print("no tenes items forro pelotudo !")
 
     if okay:
-        print("Has equipado el item",item_seleccionado.nombre)
+
+        print("\nHas equipado el item",item_seleccionado.nombre)
         return item_seleccionado.nombre
 
 #funcion de batalla
@@ -110,30 +174,37 @@ def fight(jugador,villano):
             
             if random.random() < max((jugador.precision-villano.velocidad)/100,0.3): 
 
-                j1,j2 = jugador,villano
+                print("\n"+jugador.nombre,"es mas veloz que",villano.nombre,"y le va a golpear primero\n")
+                time.sleep(1.5)
 
-            else:
-
-                j1,j2 = villano,jugador
-
-            for i in range(2):
-
-                print("\n"+j1.nombre,"es mas veloz que",j2.nombre,"y le va a golpear primero\n")
-
+                habilidad_user = elegir_habilidad(jugador)
+                
+                print("has elegido la habilidad :",jugador.habilidades[habilidad_user[0]].nombre)
                 time.sleep(1)
 
-                total_damage = j1.atacar(j2)
 
-                print("\nEse golpe le ha quitado",total_damage,"de vida\n")
+                
+                total_damage = villano.atacar(jugador)
 
-                j1,j2 = j2,j1
+            else:
+                #villano ataca primero
+                print("\n"+villano.nombre,"es mas veloz que",jugador.nombre,"y le va a golpear primero\n")
+
+                total_damage = villano.atacar(jugador)
+
+                time.sleep(1.5)
+
+
+
+            time.sleep(1)
+
 
                 # print(jugador.vida,villano.vida)
-                if jugador.vida <=0:
-                    return 0
+                # if jugador.vida <=0:
+                #     return 0
 
-                if villano.vida <=0:
-                    return 1
+                # if villano.vida <=0:
+                #     return 1
 
             check_duration_items(jugador)
 
