@@ -59,6 +59,10 @@ class Mob():
         self.precision = precision
         self.velocidad = velocidad
 
+        #esta variable se enciende cuando este envenenado,ademas de que se agregara 
+        #a la lista el valor que hay que ir restando a su vida durante los turnos activos del veneno,tambien agregados
+        self.envenenado = [False]
+
     def __str__(self):
         
         return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes :\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)

@@ -16,7 +16,7 @@ def elegir_habilidad(jugador):
         time.sleep(.5)
 
         print(habilidad.nombre,":",habilidad.descripcion,"\n")
-        print("tipo :",habilidad.tipo,"potencia :",habilidad.potencia,"{",index,"}")
+        print("tipo :",habilidad.tipo,"potencia :",habilidad.potencia,"{",index,"}\n\n")
 
     while True:
     
@@ -34,14 +34,56 @@ def elegir_habilidad(jugador):
 
 #funcion usar habilidad
 
-def usar_habilidad(jugador,vilano,habilidad):
-    
+def usar_habilidad(jugador,villano,habilidad):
+        
     habilidad_user = jugador.habilidades[habilidad]
 
+    if habilidad_user.tipo == "normal":
+    
 
+        base_ataque = random.randrange(habilidad_user.potencia[0],habilidad_user.potencia[1])
 
+        ataque = base_ataque+(base_ataque*(jugador.ataque/100))-(base_ataque*villano.defensa/100)
 
+        villano.vida -= ataque
 
+        return ataque
+    
+    if habilidad_user.tipo == "veneno":
+
+        base_ataque = random.randrange(habilidad_user.potencia[0],habilidad_user.potencia[1])
+
+        ataque = base_ataque+(base_ataque*(jugador.ataque/100))-(base_ataque*villano.defensa/100)
+
+        villano.vida -= ataque
+
+        #mecanicas de envenenamiento
+        villano.envenenado[0]=True
+        villano.envenenado.append([habilidad_user.potencia[0],habilidad_user.potencia[1],random.randrange(2,5)])
+        print("\n\nHas envenenado al villano",villano.nombre,"por",villano.envenenado[1][2],"turnos...\n")
+        time.sleep(2)
+
+        return ataque
+
+#funcion chequear duracion items (tipo veneno)
+
+def check_duration_poison(villano):
+
+    if villano.envenenado[1][2] >0:
+
+        villano.envenenado[1][2] -=1
+
+        total_damage = random.randrange(villano.envenenado[1][0],villano.envenenado[1][1])
+
+        villano.vida -= total_damage
+
+        print("El veneno afecta a",villano.nombre,"quitandole",total_damage,"puntos de vida")
+
+    else:
+        villano.envenenado[0] = False
+        del villano.envenenado[1]
+        print("El villano",villano.nombre,"se ha curado del veneno !")
+        print("xxx",villano.envenenado)
 
 
 
@@ -57,7 +99,7 @@ def check_duration_items(jugador):
             value.turnos -=1
         if value.turnos == 0:
             items_acabados.append(value.nombre)
-            print("WARNING ! se te ha acabado el item :",value.nombre)
+            print("\n\n---------------------------------------------\nWARNING ! se te ha acabado el item :",value.nombre,"\n---------------------------------------------")
 
             #segun el tipo de item que sea,volvemos a la normalidad de la stat del jugador que se habia modificado
             if value.tipo == "a":
@@ -140,8 +182,6 @@ def usar_item(jugador):
 
             print("Vas a volver a golpear gracias a",item_seleccionado.nombre)
 
-
-
         # print(list(jugador.items.values())[0].nombre)
     else:
         print("no tenes items forro pelotudo !")
@@ -179,22 +219,38 @@ def fight(jugador,villano):
 
                 habilidad_user = elegir_habilidad(jugador)
                 
-                print("has elegido la habilidad :",jugador.habilidades[habilidad_user[0]].nombre)
+                print("\nhas elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
                 time.sleep(1)
 
+                damage_user = usar_habilidad(jugador,villano,habilidad_user)
 
-                
-                total_damage = villano.atacar(jugador)
+                print("\nwoww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
+
+                if villano.vida >0:
+                    damage_villano = villano.atacar(jugador)
+                    print("\nEl pestilente villano,",villano.nombre,"te ha quitado",damage_villano,"puntos de vida")
 
             else:
                 #villano ataca primero
                 print("\n"+villano.nombre,"es mas veloz que",jugador.nombre,"y le va a golpear primero\n")
+                time.sleep(.5)
 
-                total_damage = villano.atacar(jugador)
+                damage_villano = villano.atacar(jugador)
 
+                print("\nEl pestilente villano,",villano.nombre,"te ha quitado",damage_villano,"puntos de vida")
                 time.sleep(1.5)
 
+                print("Ahora te toca a ti zurrarle...")
+                time.sleep(1.5)
 
+                habilidad_user = elegir_habilidad(jugador)
+                
+                print("\nhas elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
+                time.sleep(1)
+
+                damage_user = usar_habilidad(jugador,villano,habilidad_user)
+
+                print("\nwoww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
 
             time.sleep(1)
 
@@ -206,7 +262,11 @@ def fight(jugador,villano):
                 # if villano.vida <=0:
                 #     return 1
 
+            #chequeamos que los items sigan activos
             check_duration_items(jugador)
+
+            #chequeamos que el villano siga envenenado o no
+            check_duration_poison(villano)
 
         if action == 4:
             
@@ -214,5 +274,9 @@ def fight(jugador,villano):
 
         if action == 5:
             break
-
+    
+    if villano.vida>0:
+        return 0
+    else:
+        return 1
     

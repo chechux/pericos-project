@@ -35,8 +35,6 @@ def main(jugador):
                 time.sleep(1)
 
                 ragnarok =fb.fight(jugador,villano_actual) 
-                # print(ragnarok)
-                
 
                 if ragnarok == 0:
                     print("jugador",jugador.nombre,"derrotado de manera muy brutal")
