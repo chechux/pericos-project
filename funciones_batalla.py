@@ -1,6 +1,6 @@
 import utilidades as ut
 import random,time
-
+import sonidos_pantallas as sp
     #funciones de habilidades
 
 #funcion de elegir habilidad
@@ -83,9 +83,6 @@ def check_duration_poison(villano):
         villano.envenenado[0] = False
         del villano.envenenado[1]
         print("El villano",villano.nombre,"se ha curado del veneno !")
-        print("xxx",villano.envenenado)
-
-
 
 #funcion de duracion items
 
@@ -194,6 +191,9 @@ def usar_item(jugador):
 #funcion de batalla
 def fight(jugador,villano):
 
+    sp.mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
+    sp.mihilo_fight_theme.start()
+
     while jugador.vida >0 and villano.vida >0:
 
         action = int(input("\n\n1--Ver stats villano\n\n2--Ver stats jugador\n\n3--Atacar villano\n\n4--Usar item\n\n5--huir\n\n- - - > "))
@@ -276,7 +276,9 @@ def fight(jugador,villano):
             break
     
     if villano.vida>0:
+        sp.mihilo_fight_theme.song.close()
         return 0
     else:
+        sp.mihilo_fight_theme.song.close()
         return 1
     

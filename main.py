@@ -1,17 +1,33 @@
 #importacion de modulos principales
 import clases as cl,instanciaciones as ins,funciones_batalla as fb,utilidades as ut
+import sonidos_pantallas as sp
 
 #importacion de modulos utiles
 import random,time,os
 
 
+
+# time.sleep(2)
+# sp.mihilo_main_theme.stop_song()
 def main(jugador):
+
+    sp.mihilo_main_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/monkey.mp3")
+    sp.mihilo_main_theme.start()
 
     if isinstance(jugador,cl.Jugador):
 
         jugador.set_items()
 
+        sp.mihilo_main_theme.pause_song()
+
         while jugador.vida >0 and len(ins.dimensiones) > 0:
+
+            sp.mihilo_main_theme.song.resume()
+
+            # if sp.mihilo_main_theme.estado:
+            #     sp.mihilo_main_theme.start()
+            
+            # sp.mihilo_main_theme.estado = True
 
             print("\nvamos a entrar dentro de alguna dimension...\n")
 
@@ -33,6 +49,8 @@ def main(jugador):
                 print("\nte vas a enfrentar a",villano_actual.nombre,"\n")
 
                 time.sleep(1)
+
+                sp.mihilo_main_theme.pause_song()
 
                 ragnarok =fb.fight(jugador,villano_actual) 
 
