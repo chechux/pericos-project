@@ -191,6 +191,7 @@ def usar_item(jugador):
 #funcion de batalla
 def fight(jugador,villano):
 
+    sp.mihilo_fight_theme = sp.Songhilo()
     sp.mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
     sp.mihilo_fight_theme.start()
 
@@ -275,10 +276,10 @@ def fight(jugador,villano):
         if action == 5:
             break
     
+    del sp.mihilo_fight_theme
+
     if villano.vida>0:
-        sp.mihilo_fight_theme.song.close()
         return 0
     else:
-        sp.mihilo_fight_theme.song.close()
         return 1
     

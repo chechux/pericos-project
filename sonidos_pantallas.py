@@ -19,15 +19,45 @@ class Songhilo(th.Thread):
     def run(self):
 
         self.song.volume = 100
-        self.song.play(loop=True)
+        self.song.play(loop=True,block=False)
 
     def pause_song(self):
 
         self.song.pause()
 
+    def acabar_hilo(self):
+        self.stoprequest.set()
+        return self.stoprequest.is_set()
+
+
+
 mihilo_main_theme = Songhilo()
+mihilo_main_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/monkey.mp3")
 
 mihilo_fight_theme = Songhilo()
+mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
+
+# import time
+# mihilo_fight_theme.start()
+# time.sleep(3)
+# print(mihilo_fight_theme.acabar_hilo())
+
+# time.sleep(2)
+# print(1)
+# mihilo_fight_theme.song.play(loop=True,block=False)
+
+# time.sleep(3)
+# print(2)
+# mihilo_fight_theme.song.close()
+
+# time.sleep(2)
+# print(3)
+# del mihilo_fight_theme
+# time.sleep(3)
+
+# mihilo_fight_theme = Songhilo()
+# mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
+# print(mihilo_fight_theme)
 
 
 

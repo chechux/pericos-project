@@ -11,7 +11,6 @@ import random,time,os
 # sp.mihilo_main_theme.stop_song()
 def main(jugador):
 
-    sp.mihilo_main_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/monkey.mp3")
     sp.mihilo_main_theme.start()
 
     if isinstance(jugador,cl.Jugador):
