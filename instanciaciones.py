@@ -70,8 +70,21 @@ donut_envenenado = cl.Habilidades("Donut envenenado","veneno",(5,10),"donut de t
 golpe_borracho = cl.Habilidades("Golpe borracho","normal",(0,50),"golpe de tipo normal que puede quitar muy poco o mucho debido a la borrachera de homer")
 
 
-homero = cl.Jugador("homero",100,40,50,50,20,[bola_demolicion,donut_envenenado,golpe_borracho])
+homero = cl.Jugador("homero",100,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !",[bola_demolicion,donut_envenenado,golpe_borracho])
 
-
+homero_ascii= """  
+         &
+      .-"`"-.
+     /       \\
+     |   __  _|
+     |  /  \/ \\
+    WW  \_o/_o/
+    (        _)
+     |   .----\\
+     ;  | '----'
+      \__'--;`
+      |___/\|
+            """
+print(homero_ascii)
 
 dimensiones = [dimension_c137,dimension_fondo_de_bikini]

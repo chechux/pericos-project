@@ -78,12 +78,16 @@ class Mob():
 
 class Jugador(Mob):
 
-    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad,habilidades):
+    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad,descripcion,habilidades):
 
         super().__init__(nombre,vida,ataque,defensa,precision,velocidad)
           
+        self.descripcion = descripcion
         self.items= {}
         self.habilidades = habilidades
+        self.puntos = 0
+        self.enemigos_derrotados = 0
+        self.bosses_derrotados = 0
 
     def __str__(self):
 

@@ -8,7 +8,6 @@ class Songhilo(th.Thread):
     #con este constructor inicializamos todo lo q necesitamos ademas de el hilo en si
     def __int__(self):
 
-
         super().__init__(self)
 
     def set_song(self,ruta):
