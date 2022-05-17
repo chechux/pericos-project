@@ -73,18 +73,44 @@ golpe_borracho = cl.Habilidades("Golpe borracho","normal",(0,50),"golpe de tipo 
 homero = cl.Jugador("homero",100,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !",[bola_demolicion,donut_envenenado,golpe_borracho])
 
 homero_ascii= """  
-         &
-      .-"`"-.
-     /       \\
-     |   __  _|
-     |  /  \/ \\
-    WW  \_o/_o/
-    (        _)
-     |   .----\\
-     ;  | '----'
-      \__'--;`
-      |___/\|
+                                                                                            &              
+                                                                                         .-"`"-.
+                                                                                        /       \\                 
+                                                                                        |   __  _|
+                                                                                        |  /  \/ \\
+                                                                                       WW  \_o/_o/
+                                                                                        (        _)
+                                                                                        |   .----\\
+                                                                                        ;  | '----'
+                                                                                        \__'--;`
+                                                                                        |___/\|
             """
-print(homero_ascii)
+# print(homero_ascii)
+# print(nn)
+
+
 
 dimensiones = [dimension_c137,dimension_fondo_de_bikini]
+
+
+
+#mostrar a cada jugador
+
+def  mostrar_homero():
+    print("""
+---------------------------------------------------------------------------------------------
+                                                                                    &              
+    ataque : {}                                                                  .-"`"-.
+                                                                                /       \\                 
+    defensa : {}                                                                |   __  _|
+                                                                                |  /  \/ \\
+    precision : {}                                                             WW  \_o/_o/
+                                                                                (        _)
+    velocidad : {}                                                              |   .----\\
+                                                                                ;  | '----'
+    descripcion : {}   \__'--;`
+                                                                                |___/\|
+---------------------------------------------------------------------------------------------
+        """.format(homero.ataque,homero.defensa,homero.precision,homero.velocidad,homero.descripcion))
+
+mostrar_homero()

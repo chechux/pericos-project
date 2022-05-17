@@ -149,3 +149,18 @@ class Jugador(Mob):
                 time.sleep(1.5)
 
                 ut.limpiar_pantalla()
+
+    def mostrar_jugador(self):
+        print("""
+                                                                                        &              
+        ataque : {}                                                                  .-"`"-.
+                                                                                    /       \\                 
+        defensa : {}                                                                |   __  _|
+                                                                                    |  /  \/ \\
+        precision : {}                                                             WW  \_o/_o/
+                                                                                    (        _)
+        velocidad : {}                                                              |   .----\\
+                                                                                    ;  | '----'
+                                                                                    \__'--;`
+                                                                                    |___/\|
+            """.format(self.ataque,self.defensa,self.precision,self.velocidad))
