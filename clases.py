@@ -1,14 +1,15 @@
-import random,os,time
+import random,time
+import utilidades as ut
+import threading as th
 
+# def limpiar_pantalla():
 
-def limpiar_pantalla():
+#     limpiar = "clear"
 
-    limpiar = "clear"
-
-    if os.name in ("nt","dos"):
-        limpiar="cls"
+#     if os.name in ("nt","dos"):
+#         limpiar="cls"
     
-    os.system(limpiar)
+#     os.system(limpiar)
 
 class Dimension():
 
@@ -28,14 +29,22 @@ class Items():
         self.potencia = potencia
         self.descripcion = descipcion
         self.turnos = turnos
+        self.activo = [False]
 
     
+class Habilidades ():
 
+    def __init__(self,nombre,tipo,potencia,descripcion):
+
+        self.nombre = nombre
+        self.tipo = tipo
+        self.potencia = potencia
+        self.descripcion = descripcion
 
 selec_items = [
     
-    Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",1),
-    Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",1),
+    Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",3),
+    Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",3),
     Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube",1)
 ]
 
@@ -50,30 +59,51 @@ class Mob():
         self.precision = precision
         self.velocidad = velocidad
 
+        #esta variable se enciende cuando este envenenado,ademas de que se agregara 
+        #a la lista el valor que hay que ir restando a su vida durante los turnos activos del veneno,tambien agregados
+        self.envenenado = [False]
+
     def __str__(self):
         
-        return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)+"\n\n----------------------"
+        return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes :\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)
 
     def atacar(self,victima):
 
         total_damage = self.ataque-(self.ataque * victima.defensa/100)
 
         victima.vida -= total_damage
+        
         return total_damage
 
 
 class Jugador(Mob):
 
-    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad):
+    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad,descripcion,sonido,habilidades):
 
         super().__init__(nombre,vida,ataque,defensa,precision,velocidad)
           
+        self.descripcion = descripcion
         self.items= {}
-        self.habilidades = {}
+        self.habilidades = habilidades
+        self.sonido = sonido
+        self.puntos = 0
+        self.enemigos_derrotados = 0
+        self.bosses_derrotados = 0
+
+    def __str__(self):
+
+        if len(self.items)>0:
+            superti = ""
+            for item in self.items.values():
+                superti += item.nombre+"\ndescripcion : "+item.descripcion+" ||| activo : "+str(item.activo[0])+"\n\n"
+            return super().__str__() + "\n\nLos Items en el inventario son los siguientes :\n\n"+superti+"----------------------"
+
+        else:
+            return super().__str__() + "\n\nNo hay Items en el inventario\n\n----------------------"
 
     def set_items(self):
 
-        limpiar_pantalla()
+        ut.limpiar_pantalla()
 
         print("\n\na continuacion vas a elegir los items para",self.nombre)
         print()
@@ -81,7 +111,7 @@ class Jugador(Mob):
 
         time.sleep(3)
 
-        limpiar_pantalla() 
+        ut.limpiar_pantalla() 
 
         while len(self.items)<2:
 
@@ -102,7 +132,7 @@ class Jugador(Mob):
 
                     time.sleep(1)
 
-                    limpiar_pantalla()
+                    ut.limpiar_pantalla()
 
                 else:
 
@@ -112,169 +142,11 @@ class Jugador(Mob):
                 
                     time.sleep(1.5)
                                 
-                    limpiar_pantalla()
+                    ut.limpiar_pantalla()
 
             except Exception as e:
                 print("error! numero de item no disponible :",e)
 
                 time.sleep(1.5)
 
-                limpiar_pantalla()
-
-
-#Dimension C-137 
-
-    #items
-
-#los items de tipo sk sirven para tener 2 turnos seguidos,es decir,que el rival se pierda su tuno por alguna rzon
-pistola_portales = Items("pistola de portales","sk",0,"con la pistola de portales de rick te vas a la dimension 35 en tal de esquivar el golpe y vuelve a ser tu turno !",1)
-#los items de tipo ataque incrementan la fuerza
-espada_bacon = Items("espada bacon","a",random.randrange(10,25),"con esta ridicula y sabrosa espada aumenta tu fuerza !",1)
-#los items de tipo sanacion incrementan la vida
-cuencas_de_ojos = Items("cuencas de ojos","s",random.randrange(10,25),"con estos deliciosas y asquerosas cuencas de ojos aumenta tu salud !",1)
-#los items de tipo precicison incrementan la precision,obviamente
-parche_de_morty = Items("parche de morty","p",30,"con este parche de morty te vuelves mas audaz y tu precision aumenta",1)
-#los items
-
-    #villanos
-
-abradolf_lincler = Mob("abradolf lincler",100,5,5,50,100)
-asustadizo_terry = Mob("asustadizo terry",100,5,5,50,10)
-bola_de_nieve = Mob("bola de nieve",100,5,5,50,10)
-
-    #dimension
-
-dimension_c137 = Dimension("C-137",[pistola_portales,espada_bacon,cuencas_de_ojos,parche_de_morty],[abradolf_lincler,asustadizo_terry,bola_de_nieve])
-
-
-
-
-dimensiones = [dimension_c137] 
-        
-               
-
-homero = Jugador("homero",100,40,50,50,20) 
-
-#pruebas
-
-# homero.set_items()
-
-# dimensiones[0].villanos[0].nombre
-# print(dimensiones[0].villanos[0].nombre)
-
-
-#subfunciones que se usaran en main
-
-#funcion de batalla
-def fight(jugador,villano):
-
-    kapasao = 10
-
-    while jugador.vida >0 and villano.vida >0:
-
-        action = int(input("\n\n1--Ver stats villano\n\n2--Ver stats jugador\n\n3--Atacar villano\n\n4--Usar item\n\n5--huir\n\n"))
-
-        if action == 1:
-
-            limpiar_pantalla()
-
-            print(villano)
-
-        if action == 2:
-
-            limpiar_pantalla()
-
-            print(jugador)
-
-        if action ==3:
-            
-            if random.random() < max((jugador.precision-villano.velocidad)/100,0.3): 
-
-                j1,j2 = jugador,villano
-
-            else:
-
-                j1,j2 = villano,jugador
-
-            for i in range(2):
-
-                print(j1.nombre,"es mas veloz que",j2.nombre,"y le va a golpear primero")
-
-                time.sleep(1)
-
-                total_damage = j1.atacar(j2)
-
-                print("Ese golpe le ha quitado",total_damage,"de vida")
-
-                j1,j2 = j2,j1
-
-                # print(jugador.vida,villano.vida)
-                if jugador.vida <=0:
-                    kapasao = 0
-                    break
-
-                if villano.vida <=0:
-                    # kapasao = 1
-                    return 1
-                    break
-        
-        if action == 5:
-            break
-
-    return kapasao
-        
-dimensioness =[]
-#funcion principal del juego
-def main(jugador):
-
-    if isinstance(jugador,Jugador):
-
-        jugador.set_items()
-
-        while jugador.vida >0 and len(dimensiones) > 0:
-
-            print("\nvamos a entrar dentro de alguna dimension...\n")
-
-            time.sleep(1)
-
-            index_dimension = random.randrange(0,len(dimensiones))
-            dimension_actual = dimensiones[index_dimension]
-
-
-            print("\nvaya ! parece que hemos acabado en la dimension",dimension_actual.nombre,"\n")
-
-            time.sleep(1)
-
-            if len(dimension_actual.villanos)>0:
-
-                index_villano = random.randrange(0,len(dimension_actual.villanos)) #indice aleatorio para elegir villano aleatorio
-                villano_actual = dimension_actual.villanos[index_villano]
-
-                print("\nte vas a enfrentar a",villano_actual.nombre,"\n")
-
-                time.sleep(1)
-
-                ragnarok =fight(jugador,villano_actual)
-
-                print(ragnarok)
-
-                if ragnarok == 0:
-                    print("jugador",jugador.nombre,"derrotado de manera muy brutal")
-                elif ragnarok == 1:
-                    print("villano",villano_actual.nombre,"derrotado de manera muy brutal")
-                    del dimension_actual.villanos[index_villano]
-
-            else:
-                print("has derrotado a todos los villanos de esta dimension...")
-                del dimensiones[index_dimension]
-
-        if len(dimensiones) == 0:
-            print("Enhorabuena,te has pasado el juego -- te has pasado el juego")
-    else:
-        print("error ! no puedes jugar si no es con un jugador valido\n")
-
-    print("final while")
-
-main(homero)
-
-# print(homero)
+                ut.limpiar_pantalla()
