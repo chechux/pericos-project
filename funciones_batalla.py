@@ -192,7 +192,7 @@ def usar_item(jugador):
 def fight(jugador,villano):
 
     sp.mihilo_fight_theme = sp.Songhilo()
-    sp.mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
+    sp.mihilo_fight_theme.set_song("./recursos/lucha.mp3")
     sp.mihilo_fight_theme.start()
 
     while jugador.vida >0 and villano.vida >0:

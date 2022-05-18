@@ -28,10 +28,12 @@ class Songhilo_jugadores(Songhilo):
 
 
 mihilo_main_theme = Songhilo()
-mihilo_main_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/monkey.mp3")
+mihilo_main_theme.set_song("./recursos/monkey.mp3")
+# mihilo_main_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/monkey.mp3")
 
 mihilo_fight_theme = Songhilo()
-mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
+mihilo_fight_theme.set_song("./recursos/lucha.mp3")
+# mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
 
 
 # import time
