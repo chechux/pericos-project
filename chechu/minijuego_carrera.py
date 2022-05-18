@@ -307,11 +307,7 @@ print("!Llega a los 200 metros o destruye el vehiculo enemigo para ganar!")
 print("")
 print("(el vehiculo se elige poniendo 'v' y el numero del vehiculo por orden)")
 
-eleccion=input("-->")
-
-if eleccion != "v1" and "v2" and "v3":
-    raise ValueError ("Error, pon 'v1', 'v2'...")
-    
+eleccion=input("-->")    
 
 if eleccion == "v1":
     print(v1.nombre," ¡Buena elecion!")
