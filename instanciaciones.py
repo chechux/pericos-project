@@ -1,6 +1,5 @@
-import clases as cl
+import clases as cl,sonidos_pantallas as sp
 import random
-
 #Dimension C-137 
 
     #items
@@ -70,7 +69,7 @@ donut_envenenado = cl.Habilidades("Donut envenenado","veneno",(5,10),"donut de t
 golpe_borracho = cl.Habilidades("Golpe borracho","normal",(0,50),"golpe de tipo normal que puede quitar muy poco o mucho debido a la borrachera de homer")
 
 
-homero = cl.Jugador("homero",100,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !",[bola_demolicion,donut_envenenado,golpe_borracho])
+homero = cl.Jugador("homero",100,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !",4,[bola_demolicion,donut_envenenado,golpe_borracho])
 
 homero_ascii= """  
                                                                                             &              
@@ -112,5 +111,11 @@ def  mostrar_homero():
                                                                                 |___/\|
 ---------------------------------------------------------------------------------------------
         """.format(homero.ataque,homero.defensa,homero.precision,homero.velocidad,homero.descripcion))
+    
+    mihilo_mostrar_homer = sp.Songhilo_jugadores()
+    mihilo_mostrar_homer.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/manazas2.m4a")
+    mihilo_mostrar_homer.start()
+    del mihilo_mostrar_homer
+    
 
 mostrar_homero()

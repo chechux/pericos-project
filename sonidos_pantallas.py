@@ -19,14 +19,12 @@ class Songhilo(th.Thread):
         self.song.volume = 100
         self.song.play(loop=True,block=False)
 
-    def pause_song(self):
+class Songhilo_jugadores(Songhilo):
 
-        self.song.pause()
+    def run(self):
 
-    def acabar_hilo(self):
-        self.stoprequest.set()
-        return self.stoprequest.is_set()
-
+        self.song.volume = 100
+        self.song.play(loop=False,block=True)
 
 
 mihilo_main_theme = Songhilo()
@@ -34,6 +32,7 @@ mihilo_main_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril20
 
 mihilo_fight_theme = Songhilo()
 mihilo_fight_theme.set_song("/Users/zaslake/Desktop/2/programacion/python/abril2022/periko/recursos/lucha.mp3")
+
 
 # import time
 # mihilo_fight_theme.start()

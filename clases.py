@@ -78,13 +78,14 @@ class Mob():
 
 class Jugador(Mob):
 
-    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad,descripcion,habilidades):
+    def __init__(self,nombre,vida,ataque,defensa,precision,velocidad,descripcion,sonido,habilidades):
 
         super().__init__(nombre,vida,ataque,defensa,precision,velocidad)
           
         self.descripcion = descripcion
         self.items= {}
         self.habilidades = habilidades
+        self.sonido = sonido
         self.puntos = 0
         self.enemigos_derrotados = 0
         self.bosses_derrotados = 0
@@ -149,18 +150,3 @@ class Jugador(Mob):
                 time.sleep(1.5)
 
                 ut.limpiar_pantalla()
-
-    def mostrar_jugador(self):
-        print("""
-                                                                                        &              
-        ataque : {}                                                                  .-"`"-.
-                                                                                    /       \\                 
-        defensa : {}                                                                |   __  _|
-                                                                                    |  /  \/ \\
-        precision : {}                                                             WW  \_o/_o/
-                                                                                    (        _)
-        velocidad : {}                                                              |   .----\\
-                                                                                    ;  | '----'
-                                                                                    \__'--;`
-                                                                                    |___/\|
-            """.format(self.ataque,self.defensa,self.precision,self.velocidad))
