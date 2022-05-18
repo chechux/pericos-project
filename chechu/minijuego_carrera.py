@@ -309,7 +309,9 @@ print("(el vehiculo se elige poniendo 'v' y el numero del vehiculo por orden)")
 
 eleccion=input("-->")
 
-
+if eleccion != "v1" and "v2" and "v3":
+    raise ValueError ("Error, pon 'v1', 'v2'...")
+    
 
 if eleccion == "v1":
     print(v1.nombre," ¡Buena elecion!")
