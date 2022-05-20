@@ -1,5 +1,5 @@
 import random,time
-import utilidades as ut
+import utilidades as ut,instanciaciones as ins
 import threading as th
 
 # def limpiar_pantalla():
@@ -40,13 +40,6 @@ class Habilidades ():
         self.tipo = tipo
         self.potencia = potencia
         self.descripcion = descripcion
-
-selec_items = [
-    
-    Items("aceite_gines","s",random.randrange(15,20),"bebete este aceite colesterolientico para tener fuerza pa echar un ratejo mas en la batalla",3),
-    Items("poco_pan","a",random.randrange(5,10),"con el poder del poco pan de patica tendras un poco mas de fuerza",3),
-    Items("porro_perroviejo","p",random.randrange(50,80),"con este porro de perroviejo te concentraras mucho mas y tu precision sube",1)
-]
 
 class Mob():
 
@@ -107,15 +100,15 @@ class Jugador(Mob):
 
         print("\n\na continuacion vas a elegir los items para",self.nombre)
         print()
-        print("solo puedes escoger 2 items para tu inventario y hay un total de",len(selec_items),",elegi bien turro : \n\n")
+        print("solo puedes escoger 2 items para tu inventario y hay un total de",len(ins.selec_items),",elige bien : \n\n")
 
-        time.sleep(3)
+        time.sleep(5)
 
         ut.limpiar_pantalla() 
 
         while len(self.items)<2:
 
-            for numero,item in enumerate(selec_items):
+            for numero,item in enumerate(ins.selec_items):
 
                  print(item.nombre,"(",numero,")\n")
 
@@ -126,7 +119,7 @@ class Jugador(Mob):
 
                 eleccion = int(input("escribe el numero del item para equiparlo : "))
 
-                if selec_items[eleccion].nombre in self.items:
+                if ins.selec_items[eleccion].nombre in self.items:
 
                     print("\n\neste lo tenes repetido forro de mierda...")
 
@@ -136,9 +129,9 @@ class Jugador(Mob):
 
                 else:
 
-                    self.items[selec_items[eleccion].nombre] = selec_items[eleccion]
+                    self.items[ins.selec_items[eleccion].nombre] = ins.selec_items[eleccion]
 
-                    print("\n\n\nitem",selec_items[eleccion].nombre,"equipado con exito a",self.nombre)
+                    print("\n\n\nitem",ins.selec_items[eleccion].nombre,"equipado con exito a",self.nombre)
                 
                     time.sleep(1.5)
                                 

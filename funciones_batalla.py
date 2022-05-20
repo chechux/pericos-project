@@ -69,20 +69,22 @@ def usar_habilidad(jugador,villano,habilidad):
 
 def check_duration_poison(villano):
 
-    if villano.envenenado[1][2] >0:
+    if villano.envenenado[0]:
 
-        villano.envenenado[1][2] -=1
+        if villano.envenenado[1][2] >0:
 
-        total_damage = random.randrange(villano.envenenado[1][0],villano.envenenado[1][1])
+            villano.envenenado[1][2] -=1
 
-        villano.vida -= total_damage
+            total_damage = random.randrange(villano.envenenado[1][0],villano.envenenado[1][1])
 
-        print("El veneno afecta a",villano.nombre,"quitandole",total_damage,"puntos de vida")
+            villano.vida -= total_damage
 
-    else:
-        villano.envenenado[0] = False
-        del villano.envenenado[1]
-        print("El villano",villano.nombre,"se ha curado del veneno !")
+            print("El veneno afecta a",villano.nombre,"quitandole",total_damage,"puntos de vida")
+
+        else:
+            villano.envenenado[0] = False
+            del villano.envenenado[1]
+            print("El villano",villano.nombre,"se ha curado del veneno !")
 
 #funcion de duracion items
 
@@ -188,6 +190,52 @@ def usar_item(jugador):
         print("\nHas equipado el item",item_seleccionado.nombre)
         return item_seleccionado.nombre
 
+
+#funcion real de pelea
+def luchar(jugador,villano):
+
+    if random.random() < max((jugador.precision-villano.velocidad)/100,0.3): 
+
+        print("\n"+jugador.nombre,"es mas veloz que",villano.nombre,"y le va a golpear primero\n")
+        time.sleep(1.5)
+
+        habilidad_user = elegir_habilidad(jugador)
+        
+        print("\nhas elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
+        time.sleep(1)
+
+        damage_user = usar_habilidad(jugador,villano,habilidad_user)
+
+        print("\nwoww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
+
+        if villano.vida >0:
+            damage_villano = villano.atacar(jugador)
+            print("\nEl pestilente villano,",villano.nombre,"te ha quitado",damage_villano,"puntos de vida")
+
+    else:
+
+        #villano ataca primero
+        print("\n"+villano.nombre,"es mas veloz que",jugador.nombre,"y le va a golpear primero\n")
+        time.sleep(.5)
+
+        damage_villano = villano.atacar(jugador)
+
+        print("\nEl pestilente villano,",villano.nombre,"te ha quitado",damage_villano,"puntos de vida")
+        time.sleep(1.5)
+
+        print("Ahora te toca a ti zurrarle...")
+        time.sleep(1.5)
+
+        habilidad_user = elegir_habilidad(jugador)
+        
+        print("\nhas elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
+        time.sleep(1)
+
+        damage_user = usar_habilidad(jugador,villano,habilidad_user)
+
+        print("\nwoww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
+
+
 #funcion de batalla
 def fight(jugador,villano):
 
@@ -212,56 +260,8 @@ def fight(jugador,villano):
             print(jugador)
 
         if action ==3:
-            
-            if random.random() < max((jugador.precision-villano.velocidad)/100,0.3): 
 
-                print("\n"+jugador.nombre,"es mas veloz que",villano.nombre,"y le va a golpear primero\n")
-                time.sleep(1.5)
-
-                habilidad_user = elegir_habilidad(jugador)
-                
-                print("\nhas elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
-                time.sleep(1)
-
-                damage_user = usar_habilidad(jugador,villano,habilidad_user)
-
-                print("\nwoww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
-
-                if villano.vida >0:
-                    damage_villano = villano.atacar(jugador)
-                    print("\nEl pestilente villano,",villano.nombre,"te ha quitado",damage_villano,"puntos de vida")
-
-            else:
-                #villano ataca primero
-                print("\n"+villano.nombre,"es mas veloz que",jugador.nombre,"y le va a golpear primero\n")
-                time.sleep(.5)
-
-                damage_villano = villano.atacar(jugador)
-
-                print("\nEl pestilente villano,",villano.nombre,"te ha quitado",damage_villano,"puntos de vida")
-                time.sleep(1.5)
-
-                print("Ahora te toca a ti zurrarle...")
-                time.sleep(1.5)
-
-                habilidad_user = elegir_habilidad(jugador)
-                
-                print("\nhas elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
-                time.sleep(1)
-
-                damage_user = usar_habilidad(jugador,villano,habilidad_user)
-
-                print("\nwoww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
-
-            time.sleep(1)
-
-
-                # print(jugador.vida,villano.vida)
-                # if jugador.vida <=0:
-                #     return 0
-
-                # if villano.vida <=0:
-                #     return 1
+            luchar(jugador,villano)
 
             #chequeamos que los items sigan activos
             check_duration_items(jugador)

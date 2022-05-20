@@ -9,11 +9,19 @@ import random,time,os
 
 # time.sleep(2)
 # sp.mihilo_main_theme.stop_song()
-def main(jugador):
+def main():
 
     sp.mihilo_main_theme.start()
 
+    ut.inicio_juego()
+
+    sp.mihilo_main_theme.control_volumen(30)
+
+    jugador = ins.elegir_jugador()
+
     if isinstance(jugador,cl.Jugador):
+
+        sp.mihilo_main_theme.control_volumen(100)
 
         jugador.set_items()
 
@@ -76,4 +84,4 @@ def main(jugador):
 
     print("final while")
 
-main(ins.homero)
+main()

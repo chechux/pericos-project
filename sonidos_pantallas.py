@@ -19,6 +19,12 @@ class Songhilo(th.Thread):
         self.song.volume = 100
         self.song.play(loop=True,block=False)
 
+    def pause_song(self):
+        self.song.pause()
+
+    def control_volumen(self,new):
+        self.song.volume = new
+
 class Songhilo_jugadores(Songhilo):
 
     def run(self):
