@@ -1,9 +1,9 @@
-import clases as cl,sonidos_pantallas as sp
+from playsound import playsound 
 import time
 import random
-###Dimension Fondo de bikini###
+#Dimension Fondo de bikini###
 
-##items
+items
 
 #sk
 savia_gary=("SaviGary","sk",0,"Tirale savia de gary a tu rival para que no pueda atacar durante un turno!",1)
@@ -71,12 +71,6 @@ def mostrar_bob():
 ---------------------------------------------------------------------------------------------
 
 """. format(bob.nombre, bob.ataque, bob.defensa, bob.precision, bob.velocidad, bob.descripcion))
-
-
-mihilo_mostrar_bob = sp.Songhilo_jugadores()
-mihilo_mostrar_bob.set_song(bob.sonido)
-mihilo_mostrar_bob.start()
-del mihilo_mostrar_bob
 
 mostrar_bob()
 
