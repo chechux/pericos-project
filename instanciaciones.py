@@ -5,7 +5,6 @@ import random,time
 #Dimension C-137 
 
     #items
-x= cl.Items("x","a",10,"kkk",1)
 
 #los items de tipo sk sirven para tener 2 turnos seguidos,es decir,que el rival se pierda su tuno por alguna rzon
 pistola_portales = cl.Items("Pistola de portales","sk",0,"con la pistola de portales de rick te vas a la dimension 35 en tal de esquivar el golpe y vuelve a ser tu turno !",1)
@@ -33,7 +32,7 @@ dimension_c137 = cl.Dimension("C-137",[pistola_portales,espada_bacon,cuencas_de_
 #items
 
 #sk
-savia_gary=("SaviGary","sk",0,"tirale savia de gary a tu rival para que no pueda atacar durante un turno!",1)
+savia_gary=cl.Items("SaviGary","sk",0,"tirale savia de gary a tu rival para que no pueda atacar durante un turno!",1)
 
 #ataque
 caza_medusas = cl.Items("CazaMedusas 3000", "a", 15,"Con el nuevo modelo CazaMedusas aumenta tu daño!",2)
@@ -100,7 +99,7 @@ donut_envenenado = cl.Habilidades("Donut envenenado","veneno",(5,10),"donut de t
 golpe_borracho = cl.Habilidades("Golpe borracho","normal",(0,50),"golpe de tipo normal que puede quitar muy poco o mucho debido a la borrachera de homer")
 
 
-homero = cl.Jugador("homero",100,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !","./recursos/manazas2.mp3",[bola_demolicion,donut_envenenado,golpe_borracho])
+homero = cl.Jugador("homero",10,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !","./recursos/manazas2.mp3",[bola_demolicion,donut_envenenado,golpe_borracho])
 
         #hacker
 
@@ -109,7 +108,7 @@ golpe_envenenado = cl.Habilidades("Envenenamiento","veneno",(5,10),"Gracias a Le
 golpe_ocasional = cl.Habilidades("Golpe Ocasional","normal",(0,50),"Rayman reune energias para asestar un golpe que puede ser muy potente")
 
 
-hacker = cl.Jugador('Anonymus',150,45,50,50,25,"Este gran hacker es siniestro !","./recursos/La_purga.mp3", [ golpe_cargado, golpe_envenenado,  golpe_ocasional ] )
+hacker = cl.Jugador('Anonymus',100,45,50,50,25,"Este gran hacker es siniestro !","./recursos/La_purga.mp3", [ golpe_cargado, golpe_envenenado,  golpe_ocasional ] )
 
 
 
@@ -165,18 +164,18 @@ def mostrar_hacker():
     print("""
 ---------------------------------------------------------------------------------------------
 
-    Nombre : {}                                          █    █
-                                                                █               █
-    Ataque : {}                                  █                        █
-                                                    █                                 █
-    Defensa : {}                  ( 2 )      █  ▄▀█     █▀▄     █
-                                                █                                      
-    Precision : {}                ▐▌                  ▄▄                  █
-                                                █         ▀▄         ▄▀        █
-    Velocidad : {}               ▐██           ▀▀▀         ██▌
-                                                ▐██                              ██ 
-    Descripcion : {}         ▄████▄   ▌  ▄████▄
-
+    Nombre : {}                                            
+                                                            ▄ ▀▀ ▀▀ ▄
+    Ataque : {}                                           █           █
+                                                        █               █
+    Defensa : {}                                      █                   █
+                                                    █    ▄▀▀▀█    █▀▀▀▄    █
+    Precision : {}                                 █                        █
+                                                 ▐▌      ▄▄    ▀▀▀    ▄▄     █
+                                                   █       ▀▀▀     ▀▀▀      █
+    Velocidad : {}                                   █         ▀▀▀         █
+                                                     ▐██                 ██
+    Descripcion : {}    ▄████▄    ▀▀▀   ▄████▄
 ---------------------------------------------------------------------------------------------
         """.format( hacker.nombre, hacker.ataque, hacker.defensa, hacker.precision, hacker.velocidad, hacker.descripcion))
 
@@ -189,8 +188,10 @@ def mostrar_hacker():
 
 def elegir_jugador():
     ut.limpiar_pantalla()
-
-    print("- - > A continuacion vas a elegir un personaje para jugar...")
+    print()
+    print()
+    print()
+    print("    - - > A continuacion vas a elegir un personaje para jugar...")
     time.sleep(3)
 
     ut.limpiar_pantalla()

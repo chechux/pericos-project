@@ -1,4 +1,4 @@
-import os
+import os,time
 
 def limpiar_pantalla():
 
@@ -40,6 +40,20 @@ def inicio_juego():
                 return True
         except:
             pass
+
+
+def cargando():
+    limpiar_pantalla()
+    for x in range(50,80,10):
+        limpiar_pantalla()
+        print("""\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+
+                                {}    █████╗█████╗█████╗
+                                {}    ╚════╝╚════╝╚════╝
+
+                            \n\n\n\n\n""".format(" "*x," "*x))
+        time.sleep(1)
+    limpiar_pantalla()
 
 
 
