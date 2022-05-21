@@ -99,7 +99,7 @@ donut_envenenado = cl.Habilidades("Donut envenenado","veneno",(5,10),"donut de t
 golpe_borracho = cl.Habilidades("Golpe borracho","normal",(0,50),"golpe de tipo normal que puede quitar muy poco o mucho debido a la borrachera de homer")
 
 
-homero = cl.Jugador("homero",10,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !","./recursos/manazas2.mp3",[bola_demolicion,donut_envenenado,golpe_borracho])
+homero = cl.Jugador("homero",30,40,50,50,20,"Este jugador tiene habilidades muy variopintas y curiosas !","./recursos/manazas2.mp3",[bola_demolicion,donut_envenenado,golpe_borracho])
 
         #hacker
 
@@ -110,7 +110,7 @@ golpe_ocasional = cl.Habilidades("Golpe Ocasional","normal",(0,50),"Rayman reune
 
 hacker = cl.Jugador('Anonymus',100,45,50,50,25,"Este gran hacker es siniestro !","./recursos/La_purga.mp3", [ golpe_cargado, golpe_envenenado,  golpe_ocasional ] )
 
-
+print(homero)
 
 
 jugadores = [homero,hacker]

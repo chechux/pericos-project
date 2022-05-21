@@ -22,11 +22,12 @@ miconex = concetar("root","1234","multiverso")
 
 
 
-def subir_datos_partida(jugador,pts):
+def subir_datos_partida(jugadorr,pts,enemigos,bosses):
 
     micursor = miconex.cursor()
-    micursor.execute("insert into jugador (nombre,puntos) values({},{});".format(jugador,pts))
+    micursor.execute("insert into jugador (nombre,puntos,enemigos,bosses) values({},{},{},{})".format(jugadorr,pts,str(enemigos),str(bosses)))
     # micursor.execute("select * from jugador;")
+    # micursor.execute("insert into jugador (nombre,puntos,enemigos,bosses) values('jose',5,5,5)")
     # for x in micursor:
     #     print(x)
     miconex.commit()
@@ -37,4 +38,7 @@ def subir_datos_partida(jugador,pts):
 
 # for bd in micursor:
 #     print(bd)
+
+# subir_datos_partida("jose",999,1,2)
+# subir_datos_partida("ppp",200,2,1)
 
