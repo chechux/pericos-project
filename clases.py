@@ -48,7 +48,7 @@ class Mob():
 
     def __str__(self):
         
-        return "----------------------\n\nLas stats de "+self.nombre+" son las siguientes :\n\n"+"Vida : "+str(self.vida)+"\nAtaque : "+str(self.ataque)+"\nDefensa : "+str(self.defensa)+"\nPrecision : "+str(self.precision)+"\nVelocidad : "+str(self.velocidad)+"\n\n----------------------\n\n"
+        return "----------------------------------------------------------------------------------\n\n    - - - - > Las stats de "+self.nombre+" son las siguientes :\n\n"+"             Vida : "+str(self.vida)+"\n\n             Ataque : "+str(self.ataque)+"\n\n             Defensa : "+str(self.defensa)+"\n\n             Precision : "+str(self.precision)+"\n\n             Velocidad : "+str(self.velocidad)+"\n\n----------------------------------------------------------------------------------\n\n"
 
     def atacar(self,victima):
 
@@ -78,9 +78,9 @@ class Jugador(Mob):
         if len(self.items)>0:
             superti = ""
             for item in self.items.values():
-                superti += item.nombre+"\ndescripcion : "+item.descripcion+" ||| activo : "+str(item.activo[0])+"\n\n"
-            return super().__str__() + "\n\nLos Items en el inventario son los siguientes :\n\n"+superti+"----------------------"
+                superti += "         "+item.nombre+"\n\n                - - > Descripcion : "+item.descripcion+" ||| Activo : "+str(item.activo[0])+"\n\n"
+            return super().__str__() + "\n    - - - - > Los Items en el inventario son los siguientes :\n\n"+superti+"----------------------------------------------------------------------------------"
 
         else:
-            return super().__str__() + "\n\nNo hay Items en el inventario\n\n----------------------"
+            return super().__str__() + "\n    - - - - > No hay Items en el inventario\n\n----------------------------------------------------------------------------------"
 

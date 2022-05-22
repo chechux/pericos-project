@@ -9,24 +9,24 @@ def elegir_habilidad(jugador):
 
     ut.limpiar_pantalla()
 
-    print("\n\nElige una habilidad para utilizar : \n\n")
+    print("\n\n\n\n\n\n    - - - - > Elige una habilidad para utilizar : \n\n")
 
     for index,habilidad in enumerate(jugador.habilidades):
 
         time.sleep(.5)
 
-        print(habilidad.nombre,":",habilidad.descripcion,"\n")
-        print("tipo :",habilidad.tipo,"potencia :",habilidad.potencia,"{",index,"}\n\n")
+        print("    - - - - >",habilidad.nombre,":",habilidad.descripcion,"\n")
+        print("               Tipo :",habilidad.tipo,"Potencia :",habilidad.potencia,"{",index,"}\n\n")
 
     while True:
     
-        habilidad_user = int(input("- - - > "))
+        habilidad_user = int(input("        - - - - > "))
 
         try:
             jugador.habilidades[habilidad_user]
             return habilidad_user
         except:
-            print("error ! habilidad no existente")
+            print("    - - - - > Error ! habilidad no existente")
             time.sleep(1)
             
     #quiero crear mas tarde mis propias excepciones
@@ -60,7 +60,7 @@ def usar_habilidad(jugador,villano,habilidad):
         #mecanicas de envenenamiento
         villano.envenenado[0]=True
         villano.envenenado.append([habilidad_user.potencia[0],habilidad_user.potencia[1],random.randrange(2,5)])
-        print("\n\nHas envenenado al villano",villano.nombre,"por",villano.envenenado[1][2],"turnos...\n")
+        print("\n\n    - - - - > Has envenenado al villano",villano.nombre,"por",villano.envenenado[1][2],"turnos...\n")
         time.sleep(2)
 
         return ataque
@@ -79,12 +79,12 @@ def check_duration_poison(villano):
 
             villano.vida -= total_damage
 
-            print("El veneno afecta a",villano.nombre,"quitandole",total_damage,"puntos de vida")
+            print("    - - - - > El veneno afecta a",villano.nombre,"quitandole",total_damage,"puntos de vida")
 
         else:
             villano.envenenado[0] = False
             del villano.envenenado[1]
-            print("El villano",villano.nombre,"se ha curado del veneno !")
+            print("    - - - - > El villano",villano.nombre,"se ha curado del veneno !")
 
 #funcion de duracion items
 
@@ -98,7 +98,7 @@ def check_duration_items(jugador):
             value.turnos -=1
         if value.turnos == 0:
             items_acabados.append(value.nombre)
-            print("\n\n---------------------------------------------\nWARNING ! se te ha acabado el item :",value.nombre,"\n---------------------------------------------")
+            print("\n\n---------------------------------------------\n      WARNING ! se te ha acabado el item :",value.nombre,"\n---------------------------------------------")
 
             #segun el tipo de item que sea,volvemos a la normalidad de la stat del jugador que se habia modificado
             if value.tipo == "a":
@@ -129,13 +129,13 @@ def usar_item(jugador):
 
     if len(lista_items)>0:
 
-        print("\nTus items disponibles son los siguientes :\n")
+        print("\n\n\n\n\n    - - - - > Tus items disponibles son los siguientes :\n")
 
         for index,value in enumerate(lista_items):
 
-            print("Nombre item :",value.nombre,"\n"+value.descripcion,"potencia del item : (",value.potencia,")\n","{",index,"}","\n")
+            print("    - - - - > Nombre item :",value.nombre,"\n              "+value.descripcion,"potencia del item : (",value.potencia,")\n    ","{",index,"}","\n")
 
-        eleccion = int(input("introduce el item que queres usar por su numero : "))
+        eleccion = int(input("    - - - - > introduce el item que quieres usar por su numero : "))
 
 
         try:
@@ -197,7 +197,7 @@ def luchar(jugador,villano):
     if random.random() < max((jugador.precision-villano.velocidad)/100,0.3): 
 
         print("\n\n\n\n\n\n    - - - - > "+jugador.nombre,"es mas veloz que",villano.nombre,"y le va a golpear primero")
-        time.sleep(1.5)
+        time.sleep(2)
 
         habilidad_user = elegir_habilidad(jugador)
         
@@ -216,7 +216,7 @@ def luchar(jugador,villano):
 
         #villano ataca primero
         print("\n\n\n\n\n\n    - - - - > "+villano.nombre,"es mas veloz que",jugador.nombre,"y le va a golpear primero")
-        time.sleep(1)
+        time.sleep(2)
 
         damage_villano = villano.atacar(jugador)
 
@@ -229,12 +229,12 @@ def luchar(jugador,villano):
         habilidad_user = elegir_habilidad(jugador)
         
         print("\n\n    - - - - > Has elegido la habilidad :",jugador.habilidades[habilidad_user].nombre)
-        time.sleep(1)
+        time.sleep(1.5)
 
         damage_user = usar_habilidad(jugador,villano,habilidad_user)
 
         print("\n\n    - - - - > Woww ! ese golpe le ha quitado a",villano.nombre,damage_user,"puntos de vida")
-        time.sleep(1)
+        time.sleep(1.5)
 
 
 #funcion de batalla
@@ -244,6 +244,8 @@ def fight(jugador,villano):
     sp.mihilo_fight_theme.set_song("./recursos/lucha.mp3")
     sp.mihilo_fight_theme.control_volumen(10)
     sp.mihilo_fight_theme.start()
+
+    huir = False
 
     while jugador.vida >0 and villano.vida >0:
         try:
@@ -256,13 +258,13 @@ def fight(jugador,villano):
 
                 print(villano)
 
-            if action == 2:
+            elif action == 2:
 
                 ut.limpiar_pantalla()
 
                 print(jugador)
 
-            if action ==3:
+            elif action ==3:
 
                 ut.limpiar_pantalla()
 
@@ -274,26 +276,35 @@ def fight(jugador,villano):
                 #chequeamos que el villano siga envenenado o no
                 check_duration_poison(villano)
 
-                time.sleep(1.5)
+                time.sleep(2.5)
                 ut.limpiar_pantalla()
 
-            if action == 4:
+            elif action == 4:
                 
                 usar_item(jugador)
+                time.sleep(3)
 
                 ut.limpiar_pantalla()
 
-            if action == 5:
+            elif action == 5:
+                huir = True
                 break
+
+            else:
+                ut.limpiar_pantalla()
 
         except:
             print("\n\n\n\n\n    Error ! Caracter no valido !")
+            ut.limpiar_pantalla()
 
     
     del sp.mihilo_fight_theme
 
-    if villano.vida>0:
+    if huir:
+        return 2
+    elif villano.vida>0:
         return 0
-    else:
+    elif jugador.vida >0:
         return 1
+
     
